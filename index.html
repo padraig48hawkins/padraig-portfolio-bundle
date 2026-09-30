@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padraig — Creative Innovation Designer</title>
+<meta name="description" content="Digital designer working across campaign creative, digital experiences, motion &amp; video, and brand systems — explore the work through an interactive AI-guided portfolio.">
+
+<!-- Open Graph / social link previews (Slack, LinkedIn, iMessage, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Padraig — Creative Innovation Designer">
+<meta property="og:description" content="Digital designer working across campaign creative, digital experiences, motion & video, and brand systems — explore the work through an interactive AI-guided portfolio.">
+<!-- Add a real 1200x630 preview image (e.g. a screenshot of this site) and update this path -->
+<meta property="og:image" content="images/social-preview.jpg">
+
+<!-- Twitter/X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Padraig — Creative Innovation Designer">
+<meta name="twitter:description" content="Digital designer working across campaign creative, digital experiences, motion & video, and brand systems — explore the work through an interactive AI-guided portfolio.">
+<meta name="twitter:image" content="images/social-preview.jpg">
+
+<!-- Favicon -->
+<link rel="icon" href="images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Palette derived from Figma's real DESIGN.md (github.com/VoltAgent/awesome-design-md) —
+       stark black/white editorial base interrupted by saturated pastel color-blocks
+       (lilac, mint) plus one vivid accent (magenta) for CTAs/links. In Figma's real
+       system, text ON any colored surface is always ink (black) — not color-matched —
+       so pastel blocks pair with --ink text directly. --accent-text is a darkened,
+       contrast-checked magenta for small text-on-white uses, since the true magenta
+       fails WCAG AA at that scale; --accent stays true-brand for fills/borders. */
+    --paper:#FFFFFF;
+    --surface:#F7F7F5;
+    --ink:#000000;
+    --muted:#595959;
+    --faint:#6B6B6B;
+    --line:#E6E6E6;
+    --accent:#FF3D8B;
+    --accent-text:#BF2E68;
+    --accent-dim:#FFE6F0;
+    --maroon:#C5B0F4;
+    --maroon-dim:#DCD0F8;
+    --sky:#C8E6CD;
+    --sky-dim:#DEF0E1;
+    --live:#1EA64A;
+    --mark-bg:#3B2FF5;
+    --mark-fg:#FFFFFF;
+    --sidebar-w:260px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  ::selection{background:var(--accent-dim); color:var(--accent-text);}
+  button, textarea{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px;}
+  img{max-width:100%; display:block;}
+
+  .app{display:flex; height:100vh;}
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width:var(--sidebar-w);
+    flex-shrink:0;
+    border-right:1px solid var(--line);
+    padding:22px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+    transition:margin-left .28s ease;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:15px; letter-spacing:-0.01em;
+  }
+  .brand .mark{
+    width:26px;height:26px;border-radius:7px; background:var(--mark-bg);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--mark-fg); font-family:'Inter',sans-serif; font-size:10.5px; font-weight:600; letter-spacing:-0.02em; flex-shrink:0;
+  }
+  .nav-group{display:flex; flex-direction:column; gap:2px;}
+  .nav-label{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--faint); margin:14px 10px 6px;
+  }
+  .nav-group:first-of-type .nav-label{margin-top:0;}
+  .nav-item{
+    display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:9px;
+    font-size:13.5px; color:var(--ink); background:none; border:none; text-align:left;
+    cursor:pointer; width:100%;
+  }
+  .nav-item:hover{background:var(--surface); box-shadow:0 0 0 1px var(--line) inset;}
+  .nav-item .dot{width:5px;height:5px;border-radius:50%;background:var(--faint); flex-shrink:0;}
+
+  .sidebar-foot{
+    margin-top:auto; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint);
+    display:flex; align-items:center; gap:7px;
+  }
+  .sidebar-foot .live-dot{width:6px;height:6px;border-radius:50%;background:var(--live); box-shadow:0 0 0 3px rgba(63,139,82,.18);}
+
+  /* ---------- MAIN ---------- */
+  .main{flex:1; display:flex; flex-direction:column; min-width:0; position:relative;}
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; border-bottom:1px solid var(--line); flex-shrink:0;
+  }
+  .topbar-left{display:flex; align-items:center; gap:10px;}
+  .hamburger{
+    display:none; background:none;border:none;cursor:pointer;
+    width:32px;height:32px;border-radius:8px; align-items:center;justify-content:center;
+  }
+  .hamburger:hover{background:var(--surface); box-shadow:0 0 0 1px var(--line) inset;}
+  .hamburger span{display:block; width:16px; height:1.5px; background:var(--ink);}
+  .model-pill{display:flex;align-items:center;gap:7px; font-family:'Inter',sans-serif; font-weight:600; font-size:14px;}
+  .model-pill .role{
+    font-family:'Inter',sans-serif; font-weight:400; font-size:12.5px; color:var(--muted);
+    border-left:1px solid var(--line); padding-left:9px; margin-left:2px;
+  }
+  .status{display:flex;align-items:center;gap:6px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted);}
+  .status .live-dot{width:6px;height:6px;border-radius:50%;background:var(--live); box-shadow:0 0 0 3px rgba(63,139,82,.18);}
+
+  /* ---------- CHAT ---------- */
+  .chat-scroll{flex:1; overflow-y:auto; padding:0 0 20px;}
+  .chat-inner{max-width:720px; margin:0 auto; padding:0 24px;}
+
+  .empty-state{max-width:640px; margin:0 auto; padding:9vh 24px 0; text-align:left;}
+  .empty-state h1{
+    font-family:'Inter',sans-serif; font-size:clamp(24px,3.4vw,32px); font-weight:400;
+    letter-spacing:-0.02em; line-height:1.2; margin:0 0 10px;
+  }
+  .empty-state h1 span{color:var(--accent);}
+  .empty-state p{color:var(--muted); font-size:15px; line-height:1.6; margin:0 0 30px; max-width:480px;}
+  .chip-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .chip{
+    text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:13px 15px; cursor:pointer; font-size:13.5px; line-height:1.45; color:var(--ink);
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .chip:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .chip .chip-eyebrow{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--faint); margin-bottom:4px;
+  }
+
+  /* messages */
+  .msg{margin:26px 0; display:flex; gap:12px;}
+  .msg.user{justify-content:flex-end;}
+  .msg.user .bubble{
+    background:var(--ink); color:var(--paper); border-radius:16px 16px 4px 16px;
+    padding:11px 16px; max-width:78%; font-size:14.5px; line-height:1.55;
+  }
+  .msg.assistant{align-items:flex-start;}
+  .avatar{
+    width:26px;height:26px;border-radius:7px; background:var(--mark-bg); color:var(--mark-fg);
+    flex-shrink:0; margin-top:2px; display:flex;align-items:center;justify-content:center;
+    font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:-0.02em;
+  }
+  .assistant-body{max-width:calc(100% - 38px); width:100%;}
+  .assistant-text{font-size:14.5px; line-height:1.7; color:var(--ink); white-space:pre-wrap;}
+  .trace{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--faint); margin-top:9px; letter-spacing:.02em;}
+  .followup-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .followup-chip{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:500; color:var(--accent-text);
+    background:var(--accent-dim); border:none; border-radius:100px; padding:7px 14px;
+    cursor:pointer; transition:background .15s ease, color .15s ease;
+  }
+  .followup-chip:hover{background:var(--accent); color:var(--ink);}
+  .followup-chip:disabled{opacity:.4; cursor:default;}
+  .typing{display:flex; gap:4px; align-items:center; padding:6px 0;}
+  .typing span{width:5px;height:5px;border-radius:50%; background:var(--faint); animation:blink 1.2s infinite ease-in-out;}
+  .typing span:nth-child(2){animation-delay:.2s;}
+  .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{0%,80%,100%{opacity:.25; transform:translateY(0);} 40%{opacity:1; transform:translateY(-2px);}}
+  .cursor{display:inline-block; width:7px; height:15px; background:var(--accent); margin-left:2px; vertical-align:middle; animation:blinkcursor 1s step-start infinite;}
+  @keyframes blinkcursor{50%{opacity:0;}}
+
+  /* ---------- CATEGORY CASE-STUDY CARD ---------- */
+  .project-card{
+    margin-top:14px; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--surface);
+  }
+  .card-hero{height:120px; position:relative; overflow:hidden; background:var(--ink);}
+  .card-hero svg{width:100%; height:100%; display:block;}
+  .card-body{padding:16px 18px;}
+  .card-tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;}
+  .card-tag{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.03em;
+    color:var(--accent-text); background:var(--accent-dim); padding:3px 8px; border-radius:100px;
+  }
+  .card-tag.maroon{color:var(--ink); background:var(--maroon);}
+  .card-tag.sky{color:var(--ink); background:var(--sky);}
+  .card-title{font-family:'Inter',sans-serif; font-weight:700; font-size:16.5px; margin:0 0 4px;}
+  .card-oneliner{color:var(--muted); font-size:13.5px; line-height:1.55; margin:0 0 14px;}
+  .card-toggle{
+    display:flex; align-items:center; gap:7px; background:none; border:1px solid var(--line);
+    border-radius:10px; padding:9px 13px; font-size:13px; font-weight:500; color:var(--ink);
+    cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  }
+  .card-toggle:hover{border-color:var(--accent); color:var(--accent-text);}
+  .card-toggle svg{width:12px;height:12px; transition:transform .25s ease;}
+  .card-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+  .card-toggle[aria-expanded="true"]{color:var(--accent-text); border-color:var(--accent);}
+
+  .case-study{
+    max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.4,0,.2,1);
+    border-top:1px solid var(--line);
+  }
+  .case-study-inner{padding:20px 18px 24px;}
+  .cs-section{margin-bottom:22px;}
+  .cs-section:last-child{margin-bottom:0;}
+  .cs-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent-text); margin:0 0 7px; display:flex; align-items:center; gap:7px;
+  }
+  .cs-label::after{content:''; flex:1; height:1px; background:var(--line);}
+  .cs-text{font-size:13.5px; line-height:1.7; color:var(--ink); margin:0;}
+  .cs-text.placeholder{color:var(--faint); font-family:'JetBrains Mono',monospace; font-size:12px;}
+  .cs-two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .metric-row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .metric{border:1px solid var(--line); border-radius:10px; padding:12px 13px;}
+  .metric-value{font-family:'Inter',sans-serif; font-weight:600; font-size:15px; color:var(--accent-text); margin-bottom:2px;}
+  .metric-label{font-size:11.5px; color:var(--muted); line-height:1.4;}
+  .metric.placeholder{border-style:dashed; display:flex; align-items:center; justify-content:center; color:var(--faint); font-size:11.5px; font-family:'JetBrains Mono',monospace; text-align:center; padding:14px;}
+  .cs-close{
+    display:flex; align-items:center; gap:6px; background:none; border:none; color:var(--muted);
+    font-size:12.5px; cursor:pointer; padding:6px 2px; margin-top:4px;
+  }
+  .cs-close:hover{color:var(--accent-text);}
+
+  /* ---------- SKILLS CARD ---------- */
+  .skills-card{
+    margin-top:14px; border:1px solid var(--line); border-radius:20px; padding:18px 18px 20px; background:var(--surface);
+  }
+  .skills-card-title{font-family:'Inter',sans-serif; font-weight:600; font-size:15.5px; margin:0 0 16px;}
+  .skills-group{margin-bottom:16px;}
+  .skills-group:last-child{margin-bottom:0;}
+  .skills-group-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--faint); margin:0 0 9px;
+  }
+  .skill-pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-pill{
+    font-family:'Inter',sans-serif; font-weight:500; font-size:12.5px; color:var(--accent-text);
+    background:var(--accent-dim); padding:6px 13px; border-radius:100px;
+  }
+  .skill-pill.placeholder{
+    background:none; border:1.5px dashed var(--line); color:var(--faint);
+    font-family:'JetBrains Mono',monospace; font-weight:400; font-size:11.5px;
+  }
+  .skill-pill.maroon{color:var(--ink); background:var(--maroon);}
+  .contact-actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--paper); text-decoration:none;
+    padding:10px 16px; border-radius:10px; font-size:13.5px; font-weight:500;
+    transition:background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .contact-btn:hover{background:var(--accent); color:var(--ink);}
+  .contact-btn.secondary{background:none; color:var(--ink); border:1px solid var(--line);}
+  .contact-btn.secondary:hover{background:none; border-color:var(--maroon); color:var(--ink);}
+
+  /* ---------- QUICK GAME (quiz) ---------- */
+  .quiz-progress{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--faint); margin:0 0 12px;
+  }
+  .quiz-question{font-family:'Inter',sans-serif; font-weight:600; font-size:15px; line-height:1.4; margin:0 0 16px;}
+  .quiz-options{display:flex; flex-direction:column; gap:8px;}
+  .quiz-option{
+    text-align:left; background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    padding:11px 14px; font-size:13.5px; color:var(--ink); cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .quiz-option:hover:not(:disabled){border-color:var(--accent); background:var(--surface);}
+  .quiz-option.correct{border-color:var(--live); background:var(--accent-dim); color:var(--ink);}
+  .quiz-option.incorrect{border-color:var(--accent); background:var(--accent-dim);}
+  .quiz-option:disabled{cursor:default;}
+  .quiz-result-score{font-family:'Inter',sans-serif; font-weight:700; font-size:30px; color:var(--accent); margin:2px 0 8px;}
+  .quiz-result-msg{font-size:13.5px; color:var(--muted); line-height:1.6; margin:0 0 16px;}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; padding-left:22px; margin-top:4px;}
+  .timeline::before{content:''; position:absolute; left:5px; top:5px; bottom:5px; width:1.5px; background:var(--line);}
+  .timeline-item{position:relative; margin-bottom:20px;}
+  .timeline-item:last-child{margin-bottom:0;}
+  .timeline-dot{
+    position:absolute; left:-22px; top:4px; width:10px; height:10px; border-radius:50%;
+    background:var(--accent); border:2px solid var(--surface); box-shadow:0 0 0 1px var(--line);
+  }
+  .timeline-item.placeholder .timeline-dot{background:var(--paper); border:1.5px dashed var(--faint); box-shadow:none;}
+  .timeline-date{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--faint); margin-bottom:3px;
+  }
+  .timeline-role{font-family:'Inter',sans-serif; font-weight:600; font-size:14px; margin:0 0 3px; color:var(--ink);}
+  .timeline-role .company{color:var(--accent-text); font-weight:500;}
+  .timeline-desc{font-size:12.5px; color:var(--muted); line-height:1.55; margin:0;}
+  .timeline-item.placeholder .timeline-date,
+  .timeline-item.placeholder .timeline-role,
+  .timeline-item.placeholder .timeline-desc{color:var(--faint); font-family:'JetBrains Mono',monospace; font-weight:400;}
+
+  /* ---------- MEDIA GALLERY (used by work-category cards) ---------- */
+  .gallery{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .gallery-slot{
+    aspect-ratio:4/3; border:1.5px dashed var(--line); border-radius:10px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    color:var(--faint); font-size:11px; font-family:'JetBrains Mono',monospace; text-align:center; padding:10px;
+  }
+  .gallery-slot svg{width:18px; height:18px; opacity:.6;}
+  .gallery-slot.filled{
+    border-style:solid; border-color:var(--line); padding:0; overflow:hidden;
+    background:var(--paper);
+  }
+  .gallery-slot.filled img,
+  .gallery-slot.filled video{width:100%; height:100%; object-fit:cover; display:block;}
+  .gallery-slot.filled.link{
+    text-decoration:none; color:var(--accent-text); font-family:'Inter',sans-serif;
+    font-size:12.5px; font-weight:500; gap:8px;
+  }
+  .gallery-slot.filled.link svg{width:16px; height:16px; opacity:1;}
+
+  .showreel{
+    width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden;
+    background:var(--ink); border:1.5px dashed var(--line);
+  }
+  .showreel.filled{border-style:solid;}
+  .showreel video{width:100%; height:100%; object-fit:cover; display:block;}
+  .showreel-placeholder{
+    width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    color:var(--faint); font-size:12px; font-family:'JetBrains Mono',monospace; text-align:center; padding:20px;
+  }
+  .showreel-placeholder svg{width:22px; height:22px; opacity:.6;}
+
+  .gallery.large{grid-template-columns:repeat(3, 1fr); gap:12px;}
+  .gallery-item{display:flex; flex-direction:column; gap:6px;}
+  .gallery-caption{font-size:11px; color:var(--muted); text-align:center; font-family:'Inter',sans-serif; line-height:1.4;}
+  .gallery-group{margin-bottom:20px;}
+  .gallery-group:last-child{margin-bottom:0;}
+  .gallery-group-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--faint); margin:0 0 9px;
+  }
+  .gallery-slot.filled img{cursor:zoom-in; transition:opacity .15s ease;}
+  .gallery-slot.filled img:hover{opacity:.88;}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(10,10,20,.92); z-index:100;
+    display:none; align-items:center; justify-content:center; padding:48px;
+    cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-img{
+    max-width:100%; max-height:100%; border-radius:10px; cursor:default;
+    box-shadow:0 24px 60px rgba(0,0,0,.45); display:block;
+  }
+  .lightbox-close{
+    position:absolute; top:20px; right:22px; width:40px; height:40px; border-radius:50%;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,.18);}
+  @media (max-width:600px){
+    .lightbox{padding:20px;}
+  }
+
+  /* ---------- INPUT ---------- */
+  .input-wrap{padding:16px 24px 22px; flex-shrink:0;}
+  .input-inner{max-width:720px; margin:0 auto;}
+  .input-bar{
+    display:flex; align-items:flex-end; gap:10px; background:var(--surface); border:1px solid var(--line);
+    border-radius:18px; padding:10px 10px 10px 18px; transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .input-bar:focus-within{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-dim);}
+  .input-bar textarea{
+    flex:1; border:none; resize:none; outline:none; background:none; font-size:14.5px; line-height:1.5;
+    max-height:140px; padding:6px 0; color:var(--ink); font-family:'Inter',sans-serif;
+  }
+  .input-bar textarea::placeholder{color:var(--faint);}
+  .send-btn{
+    width:34px;height:34px; border-radius:10px; border:none; background:var(--ink); color:var(--paper);
+    display:flex;align-items:center;justify-content:center; cursor:pointer; flex-shrink:0;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .send-btn:hover{background:var(--accent); color:var(--ink);}
+  .send-btn:active{transform:scale(.94);}
+  .send-btn:disabled{opacity:.35; cursor:default; background:var(--ink);}
+  .input-foot{text-align:center; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--faint); margin-top:10px;}
+
+  .overlay{display:none;}
+  @media (max-width:860px){
+    .sidebar{position:fixed; z-index:20; top:0; left:0; height:100%; background:var(--paper); margin-left:calc(-1 * var(--sidebar-w));}
+    .sidebar.open{margin-left:0; box-shadow:0 0 30px rgba(0,0,0,.08);}
+    .hamburger{display:flex;}
+    .overlay{display:none; position:fixed; inset:0; background:rgba(20,22,26,.25); z-index:15;}
+    .overlay.open{display:block;}
+    .chip-grid{grid-template-columns:1fr;}
+    .topbar{padding:14px 16px;}
+    .input-wrap{padding:12px 14px 18px;}
+    .chat-inner{padding:0 16px;}
+    .empty-state{padding:7vh 16px 0;}
+    .cs-two-col, .metric-row, .gallery{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001s !important; transition-duration:.001s !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="mark">PH</span> Padraig</div>
+
+    <div class="nav-group">
+      <div class="nav-label">Start here</div>
+      <button class="nav-item" data-key="about" data-prompt="Tell me about Padraig.">About Padraig</button>
+      <button class="nav-item" data-key="timeline" data-prompt="What's Padraig's work history?">Work history</button>
+      <button class="nav-item" data-key="skills" data-prompt="What tools and skills does Padraig use?">Skills &amp; tools</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Work</div>
+      <button class="nav-item" data-key="campaign" data-prompt="Tell me about Padraig's Campaign Creative work.">Campaign Creative</button>
+      <button class="nav-item" data-key="digital" data-prompt="Tell me about Padraig's Digital Experiences work.">Digital Experiences</button>
+      <button class="nav-item" data-key="motion" data-prompt="Tell me about Padraig's Motion & Video work.">Motion &amp; Video</button>
+      <button class="nav-item" data-key="brand" data-prompt="Tell me about Padraig's Brand & Visual Systems work.">Brand &amp; Visual Systems</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Wrap up</div>
+      <button class="nav-item" data-key="game" data-prompt="Got a quick game?">Quick game</button>
+      <button class="nav-item" data-key="contact" data-prompt="How can I get in touch with Padraig?">Get in touch</button>
+    </div>
+
+    <div class="sidebar-foot"><span class="live-dot"></span> Available for new projects</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
+        <div class="model-pill">Padraig <span class="role">Creative Innovation Designer</span></div>
+      </div>
+      <div class="status"><span class="live-dot"></span> Dublin, IE</div>
+    </div>
+
+    <div class="chat-scroll" id="chatScroll">
+      <div class="empty-state" id="emptyState">
+        <h1>Ask me anything about <span>Padraig's work.</span></h1>
+        <p>I'm a guide built to walk you through his portfolio — projects, process, and how to reach him. Pick a starting point, or type your own question below.</p>
+        <div class="chip-grid">
+          <button class="chip" data-key="about" data-prompt="Tell me about Padraig.">
+            <span class="chip-eyebrow">Intro</span>
+            Who is Padraig, in a nutshell?
+          </button>
+          <button class="chip" data-key="timeline" data-prompt="What's Padraig's work history?">
+            <span class="chip-eyebrow">Career</span>
+            What's his work history?
+          </button>
+          <button class="chip" data-key="skills" data-prompt="What tools and skills does Padraig use?">
+            <span class="chip-eyebrow">Toolkit</span>
+            What tools and skills does he use?
+          </button>
+          <button class="chip" data-key="campaign" data-prompt="Tell me about Padraig's Campaign Creative work.">
+            <span class="chip-eyebrow">Work</span>
+            What's his campaign creative work like?
+          </button>
+          <button class="chip" data-key="digital" data-prompt="Tell me about Padraig's Digital Experiences work.">
+            <span class="chip-eyebrow">Work</span>
+            Show me his digital experiences
+          </button>
+          <button class="chip" data-key="game" data-prompt="Got a quick game?">
+            <span class="chip-eyebrow">Just for fun</span>
+            Got a quick game?
+          </button>
+        </div>
+      </div>
+      <div class="chat-inner" id="chatInner"></div>
+    </div>
+
+    <div class="input-wrap">
+      <div class="input-inner">
+        <div class="input-bar">
+          <textarea id="input" placeholder="Ask about a project, his process, or how to get in touch…" rows="1"></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="input-foot">Answers below are pre-written by AI — no live API calls.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close image">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+/* ============ WORK CATEGORIES ============
+   The four disciplines Padraig's actual work spans, rather than individual
+   named projects. Descriptions are grounded in what he's told me; the gallery
+   slots are honest placeholders — drop in real samples per category. */
+/* ============ WORK CATEGORIES — CASE STUDY FORMAT ============
+   Each category is an expandable case study. `oneLiner` and `tags` are real
+   (from Padraig). Everything else — overview/problem/research/process/
+   solution/outcome/metrics — is placeholder text for Padraig to replace
+   directly below. Just edit the strings; nothing else needs to change. */
+const CATEGORIES = {
+  campaign: {
+    title: "Campaign Creative",
+    oneLiner: "Key visuals for offer campaigns, promotional graphics, seasonal campaigns, and the multi-channel asset sets that carry them across every platform.",
+    tags: ["Offer Key Visuals", "Promotional Graphics", "Seasonal Campaigns", "Multi-Channel Assets"],
+    heroPattern: "campaign",
+    overview: "Add an overview of this body of work — what it is and who it's for.",
+    gallery: [
+      { type: "image", src: "images/6_5__iPhone__1284_x_2778.png", caption: "App Store screenshot — Crear Apuesta feature (iPhone 6.5\")" },
+      { type: "image", src: "images/8x_6_9__iPhone__1290_x_2796.png", caption: "App Store screenshot — Casino features carousel (iPhone 6.9\")" },
+      { type: "image", src: "images/App-Banners-World-Cup-Proof-V3.png", caption: "World Cup app banner template proof — offers, Crear Apuesta, Club Betfair" },
+      { type: "image", src: "images/117830_Change_of_imagery_-_Casino.png", caption: "Casino key visual — Fortune Rabbit & Fortune Ox slots" },
+      { type: "image", src: "images/4527177ad483_ds119236_heroimg_v1.png", caption: "Casino key visual — Blue Wizard, Big Circus & Age of the Gods slots" },
+      { type: "image", src: "images/PLAYER-3_CQ7A4292_jw_comp_simp.png", caption: "Sports betting key visual — EDGE bet builder feature" },
+      { type: "image", src: "images/Screen2.png", caption: "Combined sportsbook & casino key visual (Romania)" },
+      { type: "video", src: "images/3072x1152_2.mp4", caption: "Football sponsorship — wide-format video ad (3072×1152)" },
+      { type: "video", src: "images/112380_Cruzeiro_-_YouTube_pre_roll.mp4", caption: "Cruzeiro sponsorship — YouTube pre-roll ad" }
+    ]
+  },
+  digital: {
+    title: "Digital Experiences",
+    oneLiner: "Landing page redesigns and promotional web pages, built around clear user journeys and fully responsive layouts.",
+    tags: ["Landing Pages", "Promotional Web Pages", "User Journeys", "Responsive Layouts"],
+    heroPattern: "digital",
+    accent: "sky",
+    overview: "Add an overview of this body of work — what it is and who it's for.",
+    miniCategories: [
+      {
+        label: "Landing Pages",
+        items: [
+          { type: "image", src: "images/Prospect-Page-Layout-Mock-Up-2_Proof.jpg", caption: "Prospect landing page — desktop & mobile, new-customer offer" },
+          { type: "image", src: "images/DESKTOP_v3.png", caption: "Betfair Exchange desktop landing page — value proposition layout" },
+          { type: "image", src: "images/Exchange-comms-V3_Proof.png", caption: "Betfair Exchange landing page proof — desktop & mobile, login variant" },
+          { type: "video", src: "images/Desktop_V1.mp4", caption: "Desktop landing page — motion walkthrough" }
+        ]
+      },
+      {
+        label: "L Bars",
+        items: [
+          { type: "image", src: "images/Brand_L-Bar-CTV_Crear-Apuesta_FIGO-Version_proofOP1.png", caption: "CTV L-bar proof — bet builder ('Crear Apuesta'), option 1" },
+          { type: "image", src: "images/Brand_L-Bar-CTV_Crear-Apuesta_FIGO-Version_proofOP2.png", caption: "CTV L-bar proof — bet builder ('Crear Apuesta'), option 2" },
+          { type: "image", src: "images/ESPN_J_bar___EU_leagues_and_CONMEBOL__R_300_SUO_V2.png", caption: "ESPN J-bar — EU leagues & CONMEBOL, R$300 sign-up offer" }
+        ]
+      },
+      {
+        label: "Spotify Adverts",
+        items: [
+          { type: "image", src: "images/600x640.png", caption: "Spotify display ad — static creative" },
+          { type: "image", src: "images/Picture_1.png", caption: "Spotify mobile — ad placement in podcast player" },
+          { type: "image", src: "images/Picture_2.png", caption: "Spotify desktop — ad placement in playlist view" }
+        ]
+      }
+    ]
+  },
+  motion: {
+    title: "Motion & Video",
+    oneLiner: "This collection showcases my work across motion graphics, video production, and post-production.",
+    tags: ["Motion Graphics", "Social Animations", "Podcast Editing", "Promotional Videos"],
+    heroPattern: "motion",
+    accent: "maroon",
+    overview: "This collection showcases my work across motion graphics, video editing, podcast production, and digital content creation. From editing raw footage and animating branded assets to producing promotional videos and social-first content, these projects highlight my end-to-end production workflow across multiple campaigns. The showreel below features a selection of podcast edits, motion graphics, campaign content, and video editing projects, providing an overview of both my creative and technical capabilities.",
+    showreel: { src: "images/Showreel.mp4", poster: "" },
+    process: "<b>DISCOVER</b>, Review the creative brief, campaign objectives, target audience, and source assets to define the project's goals and required deliverables. <br> <b>CREATE</b>,Develop the edit, motion graphics, and visual storytelling using a combination of video editing, animation, sound, and branded assets.<br> <b>REFINE</b>,Iterate on pacing, transitions, timing, and visual consistency through stakeholder feedback and quality assurance.<br> <b>DELIVER</b>, Optimise and export content for multiple platforms, producing final videos, motion assets, thumbnails, and social-first edits ready for distribution.",
+    metrics: [
+      { value: "—", label: "Add a real metric" },
+      { value: "—", label: "Add a real metric" }
+    ],
+    gallery: [
+    { type: "image", src: "images/campaign-1.jpg", caption: "Offer key visual" },
+    { type: "link", href: "https://example.com", caption: "View live campaign" }
+  ]
+  },
+  brand: {
+    title: "Brand & Visual Systems",
+    oneLiner: "Design systems, templates and asset libraries that keep creative consistent across every campaign.",
+    tags: ["Design Systems", "Templates", "Asset Libraries", "Creative Consistency"],
+    heroPattern: "brand",
+    overview: "Add an overview of this body of work — what it is and who it's for.",
+    gallery: [
+      { type: "image", src: "images/110411_R_-300-Matched-Deposit-Offer.png", caption: "Matched deposit offer banner templates — R$300 bonus (Brazil)" },
+      { type: "image", src: "images/116852-Spain-ACQ-Banner-Templates_2_Proof3.png", caption: "Acquisition banner template system — Bet €5 Get €20 (Spain)" },
+      { type: "image", src: "images/117002_Spain-ACQ-B5-G20-tennis_ProofV2.png", caption: "Tennis-themed acquisition banner variants (Spain)" },
+      { type: "image", src: "images/117019_App-Banners-Refresh_1_ProofV1.png", caption: "App download banner refresh — multi-format templates (Brazil)" },
+      { type: "image", src: "images/117218_Spain-ACQ-B5-G20-Tennis_Proof.png", caption: "Extended tennis banner template set (Spain)" },
+      { type: "image", src: "images/117286_creative-UFC_Proof.png", caption: "UFC/MMA-themed acquisition banner variants (Spain)" }
+    ]
+  }
+};
+
+const HERO_SVGS = {
+  campaign: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="20" width="140" height="35" rx="3" fill="none" stroke="#3B2FF5" stroke-width="1.5"/><rect x="40" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="20" width="60" height="78" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="280" y="20" width="90" height="35" rx="3" fill="#3B2FF5"/><rect x="280" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/></svg>`,
+  digital: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="24" width="200" height="72" rx="4" fill="none" stroke="#2E2E42" stroke-width="1.5"/><line x1="40" y1="40" x2="240" y2="40" stroke="#2E2E42" stroke-width="1.5"/><circle cx="52" cy="32" r="2.5" fill="#00AEEF"/><circle cx="62" cy="32" r="2.5" fill="#2E2E42"/><circle cx="72" cy="32" r="2.5" fill="#2E2E42"/><rect x="270" y="24" width="90" height="72" rx="6" fill="none" stroke="#00AEEF" stroke-width="1.5" stroke-dasharray="4 3"/></svg>`,
+  motion: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><circle cx="90" cy="60" r="28" fill="none" stroke="#FF3366" stroke-width="2"/><path d="M82 46l24 14-24 14V46z" fill="#FF3366"/><rect x="160" y="56" width="200" height="4" rx="2" fill="#2E2E42"/><rect x="160" y="56" width="90" height="4" rx="2" fill="#FF3366"/><circle cx="250" cy="58" r="5" fill="#FF3366"/></svg>`,
+  brand: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><circle cx="60" cy="60" r="18" fill="#3B2FF5"/><circle cx="105" cy="60" r="18" fill="none" stroke="#2E2E42" stroke-width="1.5"/><circle cx="150" cy="60" r="18" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="30" width="160" height="14" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="53" width="120" height="14" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="76" width="140" height="14" rx="3" fill="#3B2FF5"/></svg>`
+};
+
+/* Renders real images/video/links when a category's `gallery` array has entries,
+   padding out to 4 slots with the dashed "Add..." placeholder otherwise.
+   Supported item shapes:
+     { type: "image", src: "images/foo.jpg", caption: "optional" }
+     { type: "video", src: "images/foo.mp4", caption: "optional" }
+     { type: "link",  href: "https://...",   caption: "View prototype" } */
+function buildGallery(items){
+  const placeholderIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>`;
+  const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>`;
+
+  const filledHtml = (items || []).map(item => {
+    if (item.type === 'image') {
+      return `<div class="gallery-slot filled"><img src="${item.src}" alt="${item.caption || ''}" loading="lazy"></div>`;
+    }
+    if (item.type === 'video') {
+      return `<div class="gallery-slot filled"><video src="${item.src}" controls preload="metadata"></video></div>`;
+    }
+    if (item.type === 'link') {
+      return `<a class="gallery-slot filled link" href="${item.href}" target="_blank" rel="noopener">${linkIcon}${item.caption || 'View link'}</a>`;
+    }
+    return '';
+  });
+
+  const placeholdersNeeded = Math.max(0, 4 - filledHtml.length);
+  const placeholderHtml = Array.from({ length: placeholdersNeeded }).map(() =>
+    `<div class="gallery-slot">${placeholderIcon}Add screenshot</div>`
+  );
+
+  return [...filledHtml, ...placeholderHtml].join('');
+}
+
+/* A bigger, caption-forward gallery for image-heavy categories like Campaign
+   Creative — 3 columns, more slots by default, and each image gets a visible
+   caption underneath (from the same `caption` field, not just alt text). */
+function buildImageGallery(items, slots){
+  slots = slots || 6;
+  const placeholderIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>`;
+  const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>`;
+
+  const filledHtml = (items || []).map(item => {
+    const caption = item.caption ? `<div class="gallery-caption">${item.caption}</div>` : '';
+    if (item.type === 'image') {
+      return `<div class="gallery-item"><div class="gallery-slot filled"><img src="${item.src}" alt="${item.caption || ''}" loading="lazy"></div>${caption}</div>`;
+    }
+    if (item.type === 'video') {
+      return `<div class="gallery-item"><div class="gallery-slot filled"><video src="${item.src}" controls preload="metadata"></video></div>${caption}</div>`;
+    }
+    if (item.type === 'link') {
+      return `<div class="gallery-item"><a class="gallery-slot filled link" href="${item.href}" target="_blank" rel="noopener">${linkIcon}${item.caption || 'View link'}</a></div>`;
+    }
+    return '';
+  });
+
+  const placeholdersNeeded = Math.max(0, slots - filledHtml.length);
+  const placeholderHtml = Array.from({ length: placeholdersNeeded }).map(() =>
+    `<div class="gallery-item"><div class="gallery-slot">${placeholderIcon}Add screenshot</div></div>`
+  );
+
+  return [...filledHtml, ...placeholderHtml].join('');
+}
+
+/* Renders a gallery as labelled sub-groups ("mini categories") instead of one
+   flat grid — used by Digital Experiences to separate Landing Pages / L Bars /
+   Spotify Adverts etc. Each group reuses the standard 4-slot buildGallery.
+   Shape: [{ label: "Landing Pages", items: [...] }, ...] */
+function buildMiniCategoryGallery(groups){
+  return (groups || []).map(group => `
+    <div class="gallery-group">
+      <div class="gallery-group-label">${group.label}</div>
+      <div class="gallery">${buildGallery(group.items)}</div>
+    </div>`).join('');
+}
+
+/* ============ QUICK GAME — "How well do you know Padraig?" ============
+   A short 5-question trivia round, rendered and scored entirely client-side.
+   Edit QUIZ_QUESTIONS to change or add questions; `answer` is the index of
+   the correct option. */
+const QUIZ_QUESTIONS = [
+  { q: "Which of these is NOT part of Padraig's toolkit?", options: ["Figma", "Blender", "Photoshop", "Premiere Pro"], answer: 1 },
+  { q: "Which city is Padraig based in?", options: ["London", "Dublin", "Cork", "Belfast"], answer: 1 },
+  { q: "Which of these is one of his work categories?", options: ["Sound Design", "Data Engineering", "Campaign Creative", "Legal Ops"], answer: 2 },
+  { q: "What does he use for motion graphics?", options: ["Excel", "AutoCAD", "After Effects", "Slack"], answer: 2 },
+  { q: "A big part of his day job is campaigns for...", options: ["Betting & advertising", "Aerospace", "Agriculture", "Banking software"], answer: 0 }
+];
+
+function buildQuizCard(){
+  const gameId = 'quiz-' + Math.random().toString(36).slice(2, 7);
+  return `<div class="skills-card quiz-card" data-game-id="${gameId}"></div>`;
+}
+
+function renderQuizStep(cardEl, index, score){
+  if (index >= QUIZ_QUESTIONS.length) {
+    const pct = score / QUIZ_QUESTIONS.length;
+    let msg;
+    if (pct === 1) msg = "Perfect score — you clearly did your homework. Padraig's impressed.";
+    else if (pct >= 0.6) msg = "Solid! You know your Padraig facts.";
+    else msg = "Not bad — now you know a bit more about him. Worth a proper look at his work?";
+
+    cardEl.innerHTML = `
+      <h3 class="skills-card-title">Quick game: results</h3>
+      <p class="quiz-result-score">${score} / ${QUIZ_QUESTIONS.length}</p>
+      <p class="quiz-result-msg">${msg}</p>
+      <button class="card-toggle" type="button">Play again</button>
+    `;
+    cardEl.querySelector('.card-toggle').addEventListener('click', () => {
+      renderQuizStep(cardEl, 0, 0);
+      scrollToBottom();
+    });
+    return;
+  }
+
+  const q = QUIZ_QUESTIONS[index];
+  cardEl.innerHTML = `
+    <h3 class="skills-card-title">Quick game: how well do you know Padraig?</h3>
+    <div class="quiz-progress">Question ${index + 1} of ${QUIZ_QUESTIONS.length}</div>
+    <p class="quiz-question">${q.q}</p>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `<button class="quiz-option" type="button" data-i="${i}">${opt}</button>`).join('')}
+    </div>
+  `;
+
+  const optionEls = cardEl.querySelectorAll('.quiz-option');
+  optionEls.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const chosen = parseInt(btn.getAttribute('data-i'), 10);
+      optionEls.forEach(b => b.disabled = true);
+      optionEls[q.answer].classList.add('correct');
+      if (chosen !== q.answer) btn.classList.add('incorrect');
+      const newScore = score + (chosen === q.answer ? 1 : 0);
+      setTimeout(() => {
+        renderQuizStep(cardEl, index + 1, newScore);
+        scrollToBottom();
+      }, 700);
+    });
+  });
+}
+
+/* Renders a large featured video block (used by the Motion & Video case study).
+   Set showreel.src to a real video file/URL to replace the placeholder:
+     showreel: { src: "images/showreel.mp4", poster: "images/showreel-poster.jpg" } */
+function buildShowreel(showreel){
+  if (showreel && showreel.src) {
+    const posterAttr = showreel.poster ? ` poster="${showreel.poster}"` : '';
+    return `<div class="showreel filled"><video src="${showreel.src}"${posterAttr} controls preload="metadata"></video></div>`;
+  }
+  return `<div class="showreel">
+    <div class="showreel-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+      Add your showreel — set showreel.src in the motion category
+    </div>
+  </div>`;
+}
+
+function buildCategoryCard(id){
+  const c = CATEGORIES[id];
+  if (!c) return '';
+  const uid = 'cs-' + id + '-' + Math.random().toString(36).slice(2,7);
+  const tagClass = c.accent ? ' ' + c.accent : '';
+  const tagsHtml = c.tags.map(t => `<span class="card-tag${tagClass}">${t}</span>`).join('');
+  const isPlaceholder = (s) => s.trim().startsWith('Add ');
+  const csText = (s) => `<p class="cs-text${isPlaceholder(s) ? ' placeholder' : ''}">${s}</p>`;
+
+  // Each category has its own body layout — see the branches below.
+  let bodyHtml = `<div class="cs-section"><h4 class="cs-label">Overview</h4>${csText(c.overview)}</div>`;
+
+  if (id === 'motion') {
+    bodyHtml += `
+        <div class="cs-section">
+          <h4 class="cs-label">Showreel</h4>
+          ${buildShowreel(c.showreel)}
+        </div>
+        <div class="cs-section"><h4 class="cs-label">Design process</h4>${csText(c.process)}</div>`;
+  } else if (id === 'digital') {
+    bodyHtml += `
+        <div class="cs-section">
+          <h4 class="cs-label">Gallery</h4>
+          ${buildMiniCategoryGallery(c.miniCategories)}
+        </div>`;
+  } else if (id === 'campaign' || id === 'brand') {
+    bodyHtml += `
+        <div class="cs-section">
+          <h4 class="cs-label">Gallery</h4>
+          <div class="gallery large">${buildImageGallery(c.gallery, 6)}</div>
+        </div>`;
+  }
+
+  return `
+  <div class="project-card">
+    <div class="card-hero">${HERO_SVGS[c.heroPattern] || ''}</div>
+    <div class="card-body">
+      <div class="card-tags">${tagsHtml}</div>
+      <h3 class="card-title">${c.title}</h3>
+      <p class="card-oneliner">${c.oneLiner}</p>
+      <button class="card-toggle" aria-expanded="false" aria-controls="${uid}" data-target="${uid}">
+        Open case study
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="case-study" id="${uid}">
+      <div class="case-study-inner">
+        ${bodyHtml}
+        <button class="cs-close" data-target="${uid}">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M9.5 7.5L6 4L2.5 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Collapse
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function wireCardToggles(container){
+  container.querySelectorAll('.card-toggle, .cs-close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const panel = document.getElementById(targetId);
+      const toggleBtn = container.querySelector(`.card-toggle[data-target="${targetId}"]`);
+      const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+      if (isOpen) {
+        panel.style.maxHeight = '0px';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.firstChild.textContent = 'Open case study';
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        toggleBtn.firstChild.textContent = 'Close case study';
+      }
+      setTimeout(scrollToBottom, 460);
+    });
+  });
+}
+
+/* Real skills and toolkit as given by Padraig. */
+const SKILLS_DATA = {
+  core: ["Digital Design", "Key Visual & Banner Design", "Landing Page Design", "Motion Graphics","Workflow & Automation", "Video & Podcast Editing", "UI/UX Design & Prototyping"],
+  toolkit: ["Photoshop", "After Effects", "Premiere Pro", "Adobe XD", "Figma","Magnific AI","Flora AI", "VS Code"]
+};
+
+function buildSkillsCard(){
+  const coreHtml = SKILLS_DATA.core.map(s => `<span class="skill-pill">${s}</span>`).join('');
+  const toolkitHtml = SKILLS_DATA.toolkit.map(s => `<span class="skill-pill maroon">${s}</span>`).join('');
+  return `
+  <div class="skills-card">
+    <h3 class="skills-card-title">Skills &amp; toolkit</h3>
+    <div class="skills-group">
+      <div class="skills-group-label">What he does</div>
+      <div class="skill-pills">${coreHtml}</div>
+    </div>
+    <div class="skills-group">
+      <div class="skills-group-label">Toolkit</div>
+      <div class="skill-pills">${toolkitHtml}</div>
+    </div>
+  </div>`;
+}
+
+/* Real work history. */
+const TIMELINE_DATA = [
+  { date: "2026 — Present", role: "Creative Innovation Designer", company: "Flutter UKI", desc: "Developing AI-powered workflows that enhance design team efficiency, streamline production processes, and significantly reduce creative turnaround times." },
+  { date: "2022 — 2026", role: "Digital Designer", company: "Betfair International", desc: "Created high-impact digital campaigns across web, app, social, and display, including key visuals, landing pages, motion graphics, video editing, and promotional assets." },
+  { date: "2020 (Dec) — 2022 (Feb)", role: "Print/Graphic Designer", company: "Whiteriver Group", desc: "Designed print and digital marketing materials, branding, packaging, and large-format graphics for a wide range of clients." },
+  { date: "2020 (Sep) — 2020 (Nov) — Contract", role: "Web Designer", company: "Currency fair", desc: "Migrating and rebuilding web pages with a focus on performance and usability" }
+];
+
+function buildTimelineCard(){
+  const itemsHtml = TIMELINE_DATA.map(t => `
+    <div class="timeline-item${t.placeholder ? ' placeholder' : ''}">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">${t.date}</div>
+      <h4 class="timeline-role">${t.role} <span class="company">· ${t.company}</span></h4>
+      <p class="timeline-desc">${t.desc}</p>
+    </div>`).join('');
+  return `
+  <div class="skills-card">
+    <h3 class="skills-card-title">Work history</h3>
+    <div class="timeline">${itemsHtml}</div>
+  </div>`;
+}
+
+function buildContactCard(){
+  return `
+  <div class="skills-card">
+    <h3 class="skills-card-title">Get in touch</h3>
+    <div class="contact-actions">
+      <a class="contact-btn" href="mailto:padraig48hawkins@gmail.com">
+        Email Padraig
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="contact-btn secondary" href="https://www.linkedin.com/in/padraig-hawkins-b33700150" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        View LinkedIn
+      </a>
+    </div>
+  </div>`;
+}
+
+
+/* ============ CANNED RESPONSES ============
+   No live API calls — every reply is pre-written by Padraig, so this page behaves
+   identically wherever it's hosted, with no backend, no key, and no request latency.
+   Edit the `text` strings below to change what the guide says. */
+const CANNED_RESPONSES = {
+  about: {
+    text: "Padraig is a Creative Innovation Designer based in Dublin with over six years of experience in digital design. He creates campaigns across branding, motion, video, and product experiences while using AI to rethink how creative work is made. In his spare time, he builds products and prototypes inspired by ideas he'd like to see exist.",
+    trace: "Padraig · overview",
+    followUps: [
+      { label: "What's his work history?", key: "timeline" },
+      { label: "What tools does he use?", key: "skills" },
+      { label: "Show me Campaign Creative", key: "campaign" }
+    ]
+  },
+  timeline: {
+    text: "Here's Padraig's career path so far.",
+    cardId: "timeline",
+    trace: "Work history",
+    followUps: [
+      { label: "What tools does he use?", key: "skills" },
+      { label: "Tell me about him", key: "about" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  skills: {
+    text: "Padraig works across branding, digital design, motion, video, and product experiences. Here's the toolkit behind it.",
+    cardId: "skills",
+    trace: "Skills & toolkit",
+    followUps: [
+      { label: "What's his work history?", key: "timeline" },
+      { label: "Show me Campaign Creative", key: "campaign" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  campaign: {
+    text: "A big part of Padraig's day-to-day is large betting and advertising campaigns. Here's the full case study:",
+    cardId: "campaign",
+    trace: "Campaign Creative",
+    followUps: [
+      { label: "Show me Digital Experiences", key: "digital" },
+      { label: "Show me Motion & Video", key: "motion" },
+      { label: "What tools does he use?", key: "skills" }
+    ]
+  },
+  digital: {
+    text: "Padraig also handles the web side of campaigns. Here's the full case study:",
+    cardId: "digital",
+    trace: "Digital Experiences",
+    followUps: [
+      { label: "Show me Campaign Creative", key: "campaign" },
+      { label: "Show me Brand & Visual Systems", key: "brand" },
+      { label: "What tools does he use?", key: "skills" }
+    ]
+  },
+  motion: {
+    text: "Padraig works across motion and video too. Here's the full case study:",
+    cardId: "motion",
+    trace: "Motion & Video",
+    followUps: [
+      { label: "Show me Campaign Creative", key: "campaign" },
+      { label: "Show me Brand & Visual Systems", key: "brand" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  brand: {
+    text: "Padraig also does design systems and visual identity work. Here's the full case study:",
+    cardId: "brand",
+    trace: "Brand & Visual Systems",
+    followUps: [
+      { label: "Show me Campaign Creative", key: "campaign" },
+      { label: "Show me Digital Experiences", key: "digital" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  game: {
+    text: "Sure — a quick 5-question round on how well you know Padraig. No pressure.",
+    cardId: "game",
+    trace: "Quick game",
+    followUps: [
+      { label: "Tell me about him", key: "about" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  contact: {
+    text: "Best way to reach Padraig is directly — email or LinkedIn, both below.",
+    cardId: "contact",
+    trace: "Contact",
+    followUps: [
+      { label: "Tell me about him", key: "about" },
+      { label: "See his work", key: "campaign" }
+    ]
+  },
+  fallback: {
+    text: "That's not one Padraig's written an answer for yet — try asking about his campaign work, digital experiences, motion & video, brand systems, his career, his toolkit, or how to get in touch.",
+    trace: "No match",
+    followUps: [
+      { label: "Tell me about him", key: "about" },
+      { label: "What tools does he use?", key: "skills" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  }
+};
+
+function matchKey(text){
+  const t = text.toLowerCase();
+  if (t.includes('game') || t.includes('quiz') || t.includes('play') || t.includes('trivia')) return 'game';
+  if (t.includes('campaign') || t.includes('banner') || t.includes('key visual')) return 'campaign';
+  if (t.includes('digital experience') || t.includes('landing page') || t.includes('web page') || t.includes('user journey') || t.includes('responsive')) return 'digital';
+  if (t.includes('motion') || t.includes('video') || t.includes('podcast') || t.includes('tv ad') || t.includes('editing')) return 'motion';
+  if (t.includes('brand') || t.includes('visual system') || t.includes('identity') || t.includes('typography')) return 'brand';
+  if (t.includes('history') || t.includes('career') || t.includes('experience') || t.includes('timeline') || t.includes('employ') || t.includes('job')) return 'timeline';
+  if (t.includes('tool') || t.includes('skill') || t.includes('stack') || t.includes('software')) return 'skills';
+  if (t.includes('touch') || t.includes('contact') || t.includes('hire') || t.includes('email') || t.includes('linkedin')) return 'contact';
+  if (t.includes('padraig') || t.includes('nutshell') || t.includes('who') || t.includes('about')) return 'about';
+  return null;
+}
+
+const chatInner = document.getElementById('chatInner');
+const chatScroll = document.getElementById('chatScroll');
+const emptyState = document.getElementById('emptyState');
+const input = document.getElementById('input');
+const sendBtn = document.getElementById('sendBtn');
+const sidebar = document.getElementById('sidebar');
+const hamburger = document.getElementById('hamburger');
+const overlay = document.getElementById('overlay');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+
+function openLightbox(src, alt){
+  lightboxImg.src = src;
+  lightboxImg.alt = alt || '';
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+}
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImg.src = '';
+}
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+lightboxClose.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+/* Call after inserting any gallery into the DOM — makes every real (non-placeholder)
+   gallery image clickable to view enlarged. Works for both buildGallery and
+   buildImageGallery output since both use the same .gallery-slot.filled img markup. */
+function wireGalleryLightbox(container){
+  container.querySelectorAll('.gallery-slot.filled img').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+}
+
+let busy = false;
+
+hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+
+document.querySelectorAll('[data-prompt]').forEach(el => {
+  el.addEventListener('click', () => {
+    sidebar.classList.remove('open'); overlay.classList.remove('open');
+    handleAsk(el.getAttribute('data-prompt'), el.getAttribute('data-key'));
+  });
+});
+
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+});
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (input.value.trim()) handleAsk(input.value.trim(), null);
+  }
+});
+sendBtn.addEventListener('click', () => { if (input.value.trim()) handleAsk(input.value.trim(), null); });
+
+function scrollToBottom(){ chatScroll.scrollTop = chatScroll.scrollHeight; }
+
+function addUserMessage(text){
+  const div = document.createElement('div');
+  div.className = 'msg user';
+  div.innerHTML = `<div class="bubble"></div>`;
+  div.querySelector('.bubble').textContent = text;
+  chatInner.appendChild(div);
+  scrollToBottom();
+}
+
+function addAssistantTyping(){
+  const div = document.createElement('div');
+  div.className = 'msg assistant';
+  div.innerHTML = `<div class="avatar">PH</div><div class="assistant-body"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  chatInner.appendChild(div);
+  scrollToBottom();
+  return div;
+}
+
+async function streamTextIn(container, fullText){
+  const p = document.createElement('div');
+  p.className = 'assistant-text';
+  container.appendChild(p);
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  container.appendChild(cursor);
+
+  const words = fullText.split(/(\s+)/);
+  let shown = '';
+  for (let i = 0; i < words.length; i++){
+    shown += words[i];
+    p.textContent = shown;
+    if (i % 3 === 0) scrollToBottom();
+    await new Promise(r => setTimeout(r, 9));
+  }
+  cursor.remove();
+  scrollToBottom();
+}
+
+async function handleAsk(text, key){
+  if (busy) return;
+  busy = true;
+  sendBtn.disabled = true;
+
+  emptyState.style.display = 'none';
+  addUserMessage(text);
+  input.value = '';
+  input.style.height = 'auto';
+
+  const typingEl = addAssistantTyping();
+
+  const resolvedKey = key || matchKey(text);
+  const response = CANNED_RESPONSES[resolvedKey] || CANNED_RESPONSES.fallback;
+
+  // Small pause so a pre-written answer still reads as a considered reply, not a lookup table.
+  await new Promise(r => setTimeout(r, 550 + Math.random() * 350));
+
+  const body = typingEl.querySelector('.assistant-body');
+  body.innerHTML = '';
+  await streamTextIn(body, response.text);
+
+  if (response.cardId === 'skills') {
+    const cardWrap = document.createElement('div');
+    cardWrap.innerHTML = buildSkillsCard();
+    body.appendChild(cardWrap.firstElementChild);
+  } else if (response.cardId === 'timeline') {
+    const cardWrap = document.createElement('div');
+    cardWrap.innerHTML = buildTimelineCard();
+    body.appendChild(cardWrap.firstElementChild);
+  } else if (response.cardId === 'contact') {
+    const cardWrap = document.createElement('div');
+    cardWrap.innerHTML = buildContactCard();
+    body.appendChild(cardWrap.firstElementChild);
+  } else if (response.cardId === 'game') {
+    const cardWrap = document.createElement('div');
+    cardWrap.innerHTML = buildQuizCard();
+    const cardEl = cardWrap.firstElementChild;
+    body.appendChild(cardEl);
+    renderQuizStep(cardEl, 0, 0);
+  } else if (response.cardId && CATEGORIES[response.cardId]) {
+    const cardWrap = document.createElement('div');
+    cardWrap.innerHTML = buildCategoryCard(response.cardId);
+    body.appendChild(cardWrap.firstElementChild);
+    wireCardToggles(body);
+    wireGalleryLightbox(body);
+  }
+
+  const trace = document.createElement('div');
+  trace.className = 'trace';
+  trace.textContent = response.trace;
+  body.appendChild(trace);
+
+  if (response.followUps && response.followUps.length) {
+    const row = document.createElement('div');
+    row.className = 'followup-row';
+    response.followUps.forEach(f => {
+      const btn = document.createElement('button');
+      btn.className = 'followup-chip';
+      btn.textContent = f.label;
+      btn.addEventListener('click', () => {
+        if (busy) return;
+        row.querySelectorAll('.followup-chip').forEach(b => b.disabled = true);
+        handleAsk(f.label, f.key);
+      });
+      row.appendChild(btn);
+    });
+    body.appendChild(row);
+  }
+
+  busy = false;
+  sendBtn.disabled = false;
+  scrollToBottom();
+}
+</script>
+
+</body>
+</html>
