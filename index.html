@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Padraig — Creative Innovation Designer</title>
 <meta name="description" content="Digital designer working across campaign creative, digital experiences, motion &amp; video, and brand systems — explore the work through an interactive AI-guided portfolio.">
 
@@ -69,7 +69,7 @@
   :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px;}
   img{max-width:100%; display:block;}
 
-  .app{display:flex; height:100vh;}
+  .app{display:flex; height:100vh; height:100dvh;}
 
   /* ---------- SIDEBAR ---------- */
   .sidebar{
@@ -116,7 +116,7 @@
 
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px; border-bottom:1px solid var(--line); flex-shrink:0;
+    padding:calc(16px + env(safe-area-inset-top, 0px)) 28px 16px; border-bottom:1px solid var(--line); flex-shrink:0;
   }
   .topbar-left{display:flex; align-items:center; gap:10px;}
   .hamburger{
@@ -379,7 +379,7 @@
   }
 
   /* ---------- INPUT ---------- */
-  .input-wrap{padding:16px 24px 22px; flex-shrink:0;}
+  .input-wrap{padding:16px 24px calc(22px + env(safe-area-inset-bottom, 0px)); flex-shrink:0;}
   .input-inner{max-width:720px; margin:0 auto;}
   .input-bar{
     display:flex; align-items:flex-end; gap:10px; background:var(--surface); border:1px solid var(--line);
@@ -410,7 +410,7 @@
     .overlay.open{display:block;}
     .chip-grid{grid-template-columns:1fr;}
     .topbar{padding:14px 16px;}
-    .input-wrap{padding:12px 14px 18px;}
+    .input-wrap{padding:12px 14px calc(18px + env(safe-area-inset-bottom, 0px));}
     .chat-inner{padding:0 16px;}
     .empty-state{padding:7vh 16px 0;}
     .cs-two-col, .metric-row, .gallery{grid-template-columns:1fr;}
