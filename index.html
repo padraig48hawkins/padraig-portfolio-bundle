@@ -122,9 +122,10 @@
   .hamburger{
     display:none; background:none;border:none;cursor:pointer;
     width:32px;height:32px;border-radius:8px; align-items:center;justify-content:center;
+    flex-direction:column; gap:3.5px;
   }
   .hamburger:hover{background:var(--surface); box-shadow:0 0 0 1px var(--line) inset;}
-  .hamburger span{display:block; width:16px; height:1.5px; background:var(--ink);}
+  .hamburger span{display:block; width:18px; height:2px; border-radius:1px; background:var(--ink);}
   .model-pill{display:flex;align-items:center;gap:7px; font-family:'Inter',sans-serif; font-weight:600; font-size:14px;}
   .model-pill .role{
     font-family:'Inter',sans-serif; font-weight:400; font-size:12.5px; color:var(--muted);
@@ -409,10 +410,11 @@
     .overlay{display:none; position:fixed; inset:0; background:rgba(20,22,26,.25); z-index:15;}
     .overlay.open{display:block;}
     .chip-grid{grid-template-columns:1fr;}
-    .topbar{padding:14px 16px;}
-    .input-wrap{padding:12px 14px calc(18px + env(safe-area-inset-bottom, 0px));}
+    .topbar{padding:calc(14px + env(safe-area-inset-top, 0px)) 16px;}
+    .input-wrap{padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));}
+    .input-foot{margin-top:6px;}
     .chat-inner{padding:0 16px;}
-    .empty-state{padding:7vh 16px 0;}
+    .empty-state{padding:3.5vh 16px 0;}
     .cs-two-col, .metric-row, .gallery{grid-template-columns:1fr;}
   }
   @media (prefers-reduced-motion: reduce){
@@ -455,7 +457,7 @@
   <main class="main">
     <div class="topbar">
       <div class="topbar-left">
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span></button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         <div class="model-pill">Padraig <span class="role">Creative Innovation Designer</span></div>
       </div>
       <div class="status"><span class="live-dot"></span> Dublin, IE</div>
