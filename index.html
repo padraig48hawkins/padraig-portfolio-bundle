@@ -415,6 +415,9 @@
     .topbar{padding:calc(14px + env(safe-area-inset-top, 0px)) 16px;}
     .input-wrap{padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));}
     .input-foot{margin-top:6px;}
+    /* 16px is the iOS Safari threshold — anything smaller triggers an automatic
+       zoom when the field is focused. Desktop keeps the smaller 14.5px size. */
+    .input-bar textarea{font-size:16px;}
     .chat-inner{padding:0 16px;}
     .empty-state{padding:3.5vh 16px 0;}
     .cs-two-col, .metric-row, .gallery{grid-template-columns:1fr;}
@@ -626,13 +629,14 @@ const HERO_SVGS = {
   brand: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><circle cx="60" cy="60" r="18" fill="#3B2FF5"/><circle cx="105" cy="60" r="18" fill="none" stroke="#2E2E42" stroke-width="1.5"/><circle cx="150" cy="60" r="18" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="30" width="160" height="14" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="53" width="120" height="14" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="76" width="140" height="14" rx="3" fill="#3B2FF5"/></svg>`
 };
 
-/* Renders real images/video/links when a category's `gallery` array has entries,
-   padding out to 4 slots with the dashed "Add..." placeholder otherwise.
+/* Renders real images/video/links from an items array. By default it shows only
+   real items — pass padTo (e.g. 4) to pad with dashed "Add screenshot" placeholders
+   while a section is still being filled in.
    Supported item shapes:
      { type: "image", src: "images/foo.jpg", caption: "optional" }
      { type: "video", src: "images/foo.mp4", caption: "optional" }
      { type: "link",  href: "https://...",   caption: "View prototype" } */
-function buildGallery(items){
+function buildGallery(items, padTo){
   const placeholderIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>`;
   const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>`;
 
@@ -649,7 +653,7 @@ function buildGallery(items){
     return '';
   });
 
-  const placeholdersNeeded = Math.max(0, 4 - filledHtml.length);
+  const placeholdersNeeded = Math.max(0, (padTo || 0) - filledHtml.length);
   const placeholderHtml = Array.from({ length: placeholdersNeeded }).map(() =>
     `<div class="gallery-slot">${placeholderIcon}Add screenshot</div>`
   );
