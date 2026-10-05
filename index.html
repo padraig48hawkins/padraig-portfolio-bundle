@@ -1090,7 +1090,43 @@ const CANNED_RESPONSES = {
     trace: "Contact",
     followUps: [
       { label: "Tell me about him", key: "about" },
-      { label: "See his work", key: "campaign" }
+      { label: "See his work", key: "work" }
+    ]
+  },
+  greeting: {
+    text: "Hi there! I'm the guide to Padraig's portfolio — I can walk you through his work, his career, the tools he uses, or how to get in touch. Where would you like to start?",
+    trace: "Greeting",
+    followUps: [
+      { label: "Show me his work", key: "work" },
+      { label: "Tell me about him", key: "about" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  thanks: {
+    text: "Anytime! If there's anything else you'd like to see, just ask — or if you're ready to talk to Padraig directly, his contact details are one tap away.",
+    trace: "Sign-off",
+    followUps: [
+      { label: "Show me his work", key: "work" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
+  work: {
+    text: "Padraig's work falls into four areas — pick one and I'll open the full case study.",
+    trace: "Work overview",
+    followUps: [
+      { label: "Campaign Creative", key: "campaign" },
+      { label: "Digital Experiences", key: "digital" },
+      { label: "Motion & Video", key: "motion" },
+      { label: "Brand & Visual Systems", key: "brand" }
+    ]
+  },
+  site: {
+    text: "Good question — this chat is a guided way to explore Padraig's portfolio. The answers are pre-written, so there's no live AI model behind it: it just matches what you type to the right topic and shows you the work. If you'd rather talk to the real Padraig, his contact details are one tap away.",
+    trace: "About this chat",
+    followUps: [
+      { label: "Show me his work", key: "work" },
+      { label: "Tell me about him", key: "about" },
+      { label: "How do I get in touch?", key: "contact" }
     ]
   },
   fallback: {
@@ -1104,18 +1140,124 @@ const CANNED_RESPONSES = {
   }
 };
 
+/* ============ CHAT KEYWORD MATCHING ============
+   When someone types a question, it's scored against each topic's word list below
+   and answered with the best match. To teach the chat a new word, add it to the
+   right list. (Pill buttons and the sidebar skip all this and go straight to their answer.)
+
+     words – strong matches. Worth 1 point each; a multi-word phrase is worth 1 point per word.
+     weak  – vague words (half a point) that only decide the answer when nothing stronger matched.
+
+   How a word matches:
+     • "banner" also catches "banners" and "bannered" (the word may continue after it),
+       but never matches in the middle of another word ("urban banner" is fine, "turbanner" is not).
+     • Words of 3 letters or fewer ("ai", "ux", "cv", "dm") must match exactly — so "ai"
+       can never fire inside "email" or "campaign".
+     • Put = in front ("=play") to force an exact whole-word match.
+   If two topics tie, the one higher in this list wins. */
+const TOPICS = [
+  { key: 'site', words: [
+      'how does this', 'how does it work', 'how do you work', 'how does the chat', 'are you ai',
+      'are you real', 'are you a bot', 'are you a robot', 'are you human', 'is this ai', 'is this real',
+      'is this a bot', 'is this chatgpt', 'are you chatgpt', 'are you claude', 'what are you',
+      'who made you', 'who built you', 'how was this made', 'how did you make this', 'pre written',
+      'prewritten', 'live ai', 'chatbot' ] },
+
+  { key: 'game', words: [
+      'game', 'quiz', 'trivia', '=play', 'for fun', 'something fun', 'bored',
+      'challenge me', 'test me', 'test my', 'puzzle' ] },
+
+  { key: 'campaign', words: [
+      'campaign', 'banner', 'key visual', '=kv', '=ad', '=ads', 'advert', 'advertis', 'betting',
+      'sportsbook', 'casino', 'app store', 'social media', 'social ad', 'promo', 'marketing', 'world cup' ] },
+
+  { key: 'digital', words: [
+      'digital experience', 'digital', 'landing page', 'landing', 'web page', 'webpage', 'website',
+      'web design', '=web', '=ux', '=ui', 'user journey', 'user experience', 'user interface',
+      'responsive', 'l bar', 'spotify', 'spotify ad', 'prototype' ] },
+
+  { key: 'motion', words: [
+      'motion', 'video', 'podcast', 'tv ad', 'tv commercial', 'showreel', '=reel', 'animat',
+      'edit', 'film', 'footage', 'youtube', 'pre roll', 'sponsor' ] },
+
+  { key: 'brand', words: [
+      'brand', 'visual system', 'visual identity', 'identity', 'typography', 'logo',
+      'design system', 'template', 'style guide', 'guideline', 'visual language', 'asset' ] },
+
+  { key: 'skills', words: [
+      'tool', 'skill', 'stack', 'software', 'photoshop', 'after effects', 'premiere', 'figma', '=xd',
+      'adobe', 'vs code', 'visual studio', 'magnific', 'flora', '=ai', 'artificial intelligence',
+      'automat', 'workflow', 'prompt', 'proficien', 'tech', 'strength', 'expert', 'specialis',
+      'capabilit', 'what does he use', 'what do you use' ] },
+
+  { key: 'timeline', words: [
+      'history', 'career', 'experience', 'timeline', 'employ', 'job', 'jobs', 'resume', '=cv',
+      'curriculum vitae', 'worked', 'where does he work', 'where do you work', 'previous role',
+      'past role', 'role', 'flutter', 'betfair', 'currency fair', 'currencyfair', 'whiteriver',
+      'white river', 'years' ] },
+
+  { key: 'contact', words: [
+      'touch', 'contact', 'hire', 'hiring', 'recruit', 'email', 'mail', 'linkedin', 'reach',
+      'message', '=dm', 'phone', 'call', 'availab', 'freelance', 'book', 'rate', 'salary',
+      'price', 'pricing', 'cost', 'quote', 'enquir', 'inquir', 'collaborat', 'work with',
+      'work together', 'talk to', 'speak to', 'speak with', 'opportunit', 'open to', 'connect' ] },
+
+  { key: 'work', weak: [
+      '=work', '=projects', 'project', 'portfolio', 'case stud', 'example', 'sample', 'gallery',
+      'showcase', 'recent work', 'best work', 'highlights', 'what has he made', 'what have you made',
+      'what did he make', 'what has he done', 'what has he created', 'show me everything' ] },
+
+  { key: 'about', words: [
+      'who is', 'who are you', 'whos', 'about padraig', 'about him', 'about you', 'what does he do',
+      'what do you do', 'what he does', 'introduce', 'intro', 'nutshell', 'bio', 'biograph',
+      'background', 'based', 'where is he', 'where are you', 'dublin', 'ireland', 'irish',
+      'overview', 'summary' ],
+    weak: [ 'about', 'who', 'padraig' ] }
+];
+
+// Lower-case, drop apostrophes, turn everything else that isn't a letter/number into a space.
+function normalizeQuery(s){
+  return ' ' + String(s).toLowerCase().replace(/[\u2019']/g, '').replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
+}
+function keywordHits(padded, kw){
+  let exact = false;
+  if (kw.charAt(0) === '=') { exact = true; kw = kw.slice(1); }
+  const word = normalizeQuery(kw).trim();
+  if (!word) return false;
+  return (exact || word.length <= 3) ? padded.includes(' ' + word + ' ') : padded.includes(' ' + word);
+}
+function scoreTopic(padded, topic){
+  let score = 0;
+  (topic.words || []).forEach(w => {
+    if (keywordHits(padded, w)) score += normalizeQuery(w.replace(/^=/, '')).trim().split(' ').length;
+  });
+  (topic.weak || []).forEach(w => { if (keywordHits(padded, w)) score += 0.5; });
+  return score;
+}
+
+// "hi", "hello there", "thanks!" etc. — only when that's the WHOLE message, so
+// "thanks, what tools does he use?" still gets the tools answer.
+const SMALL_TALK = {
+  greetCore:    new Set(['hi','hello','hey','hiya','howdy','yo','sup','hallo','hola','morning','afternoon','evening']),
+  greetFiller:  new Set(['there','all','everyone','everybody','good','padraig','guide','bot','a','lovely','and']),
+  thanksCore:   new Set(['thanks','thank','thx','ty','cheers','bye','goodbye','cya','appreciate','legend']),
+  thanksFiller: new Set(['you','so','much','very','a','lot','brilliant','great','perfect','cool','nice','awesome','ok','okay','see','ya','later','that','it','this','help','helpful','for','the','all','mate','and'])
+};
 function matchKey(text){
-  const t = text.toLowerCase();
-  if (t.includes('game') || t.includes('quiz') || t.includes('play') || t.includes('trivia')) return 'game';
-  if (t.includes('campaign') || t.includes('banner') || t.includes('key visual')) return 'campaign';
-  if (t.includes('digital experience') || t.includes('landing page') || t.includes('web page') || t.includes('user journey') || t.includes('responsive')) return 'digital';
-  if (t.includes('motion') || t.includes('video') || t.includes('podcast') || t.includes('tv ad') || t.includes('editing')) return 'motion';
-  if (t.includes('brand') || t.includes('visual system') || t.includes('identity') || t.includes('typography')) return 'brand';
-  if (t.includes('history') || t.includes('career') || t.includes('experience') || t.includes('timeline') || t.includes('employ') || t.includes('job')) return 'timeline';
-  if (t.includes('tool') || t.includes('skill') || t.includes('stack') || t.includes('software')) return 'skills';
-  if (t.includes('touch') || t.includes('contact') || t.includes('hire') || t.includes('email') || t.includes('linkedin')) return 'contact';
-  if (t.includes('padraig') || t.includes('nutshell') || t.includes('who') || t.includes('about')) return 'about';
-  return null;
+  const padded = normalizeQuery(text);
+  const tokens = padded.trim().split(' ').filter(Boolean);
+  if (!tokens.length) return null;
+  const only = (core, filler, max) => tokens.length <= max &&
+    tokens.some(t => core.has(t)) && tokens.every(t => core.has(t) || filler.has(t));
+  if (only(SMALL_TALK.greetCore, SMALL_TALK.greetFiller, 5)) return 'greeting';
+  if (only(SMALL_TALK.thanksCore, SMALL_TALK.thanksFiller, 6)) return 'thanks';
+  let best = null, bestScore = 0;
+  TOPICS.forEach(topic => {
+    const score = scoreTopic(padded, topic);
+    if (score > bestScore) { best = topic.key; bestScore = score; }   // ties go to the earlier topic
+  });
+  return best;
 }
 
 const chatInner = document.getElementById('chatInner');
