@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3546BM5NC9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3546BM5NC9');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <!-- Must match --paper below. Update this if the palette's background color ever changes. -->
@@ -123,6 +114,33 @@
     display:flex; align-items:center; gap:7px;
   }
   .sidebar-foot .live-dot{width:6px;height:6px;border-radius:50%;background:var(--live); box-shadow:0 0 0 3px rgba(63,139,82,.18);}
+
+  /* ---------- COOKIE CONSENT ---------- */
+  .sidebar-privacy{
+    align-self:flex-start; margin:-14px 0 0; padding:0; background:none; border:none; cursor:pointer;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--faint); text-decoration:underline; text-underline-offset:3px;
+  }
+  .sidebar-privacy:hover{color:var(--accent-text);}
+  .consent{
+    position:fixed; z-index:50; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+    width:min(360px, calc(100vw - 32px)); box-sizing:border-box;
+    background:var(--paper); color:var(--ink); border:1px solid var(--line); border-radius:16px;
+    box-shadow:0 10px 36px rgba(0,0,0,.14); padding:16px 16px 14px;
+    font-family:'Inter',sans-serif;
+  }
+  .consent[hidden]{display:none;}
+  .consent p{margin:0 0 12px; font-size:13px; line-height:1.55; color:var(--muted);}
+  .consent p strong{color:var(--ink); font-weight:600;}
+  .consent-actions{display:flex; gap:8px;}
+  .consent-btn{
+    flex:1; font-family:'Inter',sans-serif; font-size:13px; font-weight:500; color:var(--ink);
+    background:var(--paper); border:1px solid var(--ink); border-radius:100px; padding:9px 14px; cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .consent-btn:hover{background:var(--accent); border-color:var(--accent); color:var(--ink);}
+  @media (max-width:860px){
+    .consent{left:12px; right:12px; width:auto; bottom:calc(12px + env(safe-area-inset-bottom, 0px));}
+  }
 
   /* ---------- MAIN ---------- */
   .main{flex:1; display:flex; flex-direction:column; min-width:0; position:relative;}
@@ -495,6 +513,7 @@
     </div>
 
     <div class="sidebar-foot"><span class="live-dot"></span> Available for new projects</div>
+    <button class="sidebar-privacy" id="cookieSettings" type="button">Cookie settings</button>
   </aside>
 
   <main class="main">
@@ -1505,6 +1524,66 @@ async function handleAsk(text, key){
   sendBtn.disabled = false;
   scrollToBottom();
 }
+</script>
+
+<!-- Cookie consent: Google Analytics only loads after the visitor accepts -->
+<div class="consent" id="consent" role="dialog" aria-label="Cookie preferences" hidden>
+  <p><strong>Cookies?</strong> I'd like to use Google Analytics to count visits to this site. It sets cookies, so nothing is tracked unless you accept.</p>
+  <div class="consent-actions">
+    <button class="consent-btn" id="consentDecline" type="button">Decline</button>
+    <button class="consent-btn" id="consentAccept" type="button">Accept</button>
+  </div>
+</div>
+<script>
+(function(){
+  var GA_ID = 'G-3546BM5NC9';
+  var KEY = 'ph_analytics_consent';
+  var banner = document.getElementById('consent');
+
+  function read(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+  function write(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+
+  function loadGA(){
+    if (window.__gaLoaded) return;
+    window.__gaLoaded = true;
+    window['ga-disable-' + GA_ID] = false;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+    document.head.appendChild(s);
+  }
+
+  function clearGA(){
+    window['ga-disable-' + GA_ID] = true;
+    var host = location.hostname, parts = host.split('.'), domains = [host, '.' + host];
+    if (parts.length > 2) domains.push('.' + parts.slice(-2).join('.'));
+    document.cookie.split(';').forEach(function(c){
+      var name = c.split('=')[0].trim();
+      if (name === '_ga' || name === '_gid' || name.indexOf('_ga_') === 0) {
+        domains.forEach(function(d){
+          document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=' + d;
+        });
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+      }
+    });
+  }
+
+  function show(){ banner.hidden = false; }
+  function hide(){ banner.hidden = true; }
+
+  document.getElementById('consentAccept').addEventListener('click', function(){ write('granted'); hide(); loadGA(); });
+  document.getElementById('consentDecline').addEventListener('click', function(){ write('denied'); hide(); clearGA(); });
+  document.getElementById('cookieSettings').addEventListener('click', function(){ show(); document.getElementById('consentDecline').focus(); });
+
+  var saved = read();
+  if (saved === 'granted') loadGA();
+  else if (saved !== 'denied') show();
+})();
 </script>
 
 </body>
