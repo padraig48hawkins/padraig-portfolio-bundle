@@ -226,6 +226,8 @@
   }
   .card-hero{height:120px; position:relative; overflow:hidden; background:var(--ink);}
   .card-hero svg{width:100%; height:100%; display:block;}
+  .card-hero.has-img{height:auto; background:#111;}
+  .card-hero.has-img img{width:100%; height:auto; display:block;}
   .card-body{padding:16px 18px;}
   .card-tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;}
   .card-tag{
@@ -245,6 +247,14 @@
   .card-toggle svg{width:12px;height:12px; transition:transform .25s ease;}
   .card-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
   .card-toggle[aria-expanded="true"]{color:var(--accent-text); border-color:var(--accent);}
+
+  .card-link{
+    display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line);
+    border-radius:10px; padding:9px 13px; font-size:13px; font-weight:500; color:var(--ink);
+    text-decoration:none; transition:border-color .15s ease, color .15s ease;
+  }
+  .card-link:hover{border-color:var(--accent); color:var(--accent-text);}
+  .card-link svg{width:12px;height:12px;}
 
   .case-study{
     scroll-margin-top:10px;
@@ -507,6 +517,11 @@
     </div>
 
     <div class="nav-group">
+      <div class="nav-label">Side project</div>
+      <button class="nav-item" data-key="outtonight" data-prompt="Tell me about Out Tonight.">Out Tonight</button>
+    </div>
+
+    <div class="nav-group">
       <div class="nav-label">Wrap up</div>
       <button class="nav-item" data-key="game" data-prompt="Got a quick game?">Quick game</button>
       <button class="nav-item" data-key="contact" data-prompt="How can I get in touch with Padraig?">Get in touch</button>
@@ -683,12 +698,22 @@ const CATEGORIES = {
       { type: "image", src: "images/117286_creative-UFC_Proof.png", caption: "UFC/MMA-themed acquisition banner variants (Spain)", w: 3468, h: 3370 }
     ]
   }
+  ,
+  outtonight: {
+    title: "Out Tonight",
+    oneLiner: "A pub finder for Ireland. Can't decide where to go? Spin for it and get a pick, or plan a bar crawl, with pubs near you.",
+    tags: ["Side Project", "Product Design", "Web App"],
+    heroPattern: "outtonight",
+    heroImage: { src: "images/out-tonight-card.jpg", alt: "Out Tonight: pub finder for Ireland. Spin for it.", w: 1200, h: 630 },
+    link: { href: "https://outtonight.ie/", label: "Visit outtonight.ie" }
+  }
 };
 
 const HERO_SVGS = {
   campaign: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="20" width="140" height="35" rx="3" fill="none" stroke="#3B2FF5" stroke-width="1.5"/><rect x="40" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="20" width="60" height="78" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="280" y="20" width="90" height="35" rx="3" fill="#3B2FF5"/><rect x="280" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/></svg>`,
   digital: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="24" width="200" height="72" rx="4" fill="none" stroke="#2E2E42" stroke-width="1.5"/><line x1="40" y1="40" x2="240" y2="40" stroke="#2E2E42" stroke-width="1.5"/><circle cx="52" cy="32" r="2.5" fill="#00AEEF"/><circle cx="62" cy="32" r="2.5" fill="#2E2E42"/><circle cx="72" cy="32" r="2.5" fill="#2E2E42"/><rect x="270" y="24" width="90" height="72" rx="6" fill="none" stroke="#00AEEF" stroke-width="1.5" stroke-dasharray="4 3"/></svg>`,
   motion: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><circle cx="90" cy="60" r="28" fill="none" stroke="#FF3366" stroke-width="2"/><path d="M82 46l24 14-24 14V46z" fill="#FF3366"/><rect x="160" y="56" width="200" height="4" rx="2" fill="#2E2E42"/><rect x="160" y="56" width="90" height="4" rx="2" fill="#FF3366"/><circle cx="250" cy="58" r="5" fill="#FF3366"/></svg>`,
+  outtonight: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="95" y="22" width="60" height="76" rx="8" fill="#F7F7FF"/><rect x="170" y="22" width="60" height="76" rx="8" fill="#F7F7FF"/><rect x="245" y="22" width="60" height="76" rx="8" fill="#F7F7FF"/><circle cx="125" cy="60" r="16" fill="#FF3366"/><circle cx="200" cy="60" r="16" fill="#FFD020"/><circle cx="275" cy="60" r="16" fill="#00D68F"/><rect x="95" y="52" width="210" height="16" fill="none" stroke="#3B2FF5" stroke-width="2"/><path d="M325 30v50" stroke="#2E2E42" stroke-width="3" stroke-linecap="round"/><circle cx="325" cy="28" r="6" fill="#FF3366"/></svg>`,
   brand: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><circle cx="60" cy="60" r="18" fill="#3B2FF5"/><circle cx="105" cy="60" r="18" fill="none" stroke="#2E2E42" stroke-width="1.5"/><circle cx="150" cy="60" r="18" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="30" width="160" height="14" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="53" width="120" height="14" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="76" width="140" height="14" rx="3" fill="#3B2FF5"/></svg>`
 };
 
@@ -907,6 +932,25 @@ function buildCategoryCard(id){
         </div>`;
   }
 
+  // A card with no case-study body (e.g. Out Tonight) shows a link instead of the toggle.
+  if (!bodyHtml.trim() && c.link) {
+    const heroHtml = c.heroImage
+      ? `<div class="card-hero has-img"><img src="${c.heroImage.src}" alt="${c.heroImage.alt}" width="${c.heroImage.w}" height="${c.heroImage.h}" loading="lazy"></div>`
+      : `<div class="card-hero">${HERO_SVGS[c.heroPattern] || ''}</div>`;
+    return `
+  <div class="project-card">
+    ${heroHtml}
+    <div class="card-body">
+      <div class="card-tags">${tagsHtml}</div>
+      <h3 class="card-title">${c.title}</h3>
+      <p class="card-oneliner">${c.oneLiner}</p>
+      <a class="card-link" href="${c.link.href}" target="_blank" rel="noopener">${c.link.label}
+        <svg viewBox="0 0 12 12" fill="none"><path d="M4 2.5h5.5V8M9.5 2.5L2.5 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>`;
+  }
+
   return `
   <div class="project-card">
     <div class="card-hero">${HERO_SVGS[c.heroPattern] || ''}</div>
@@ -1105,6 +1149,16 @@ const CANNED_RESPONSES = {
       { label: "How do I get in touch?", key: "contact" }
     ]
   },
+  outtonight: {
+    text: "Out Tonight was built to take the decision-making out of the group chat. It helps people find new pubs in towns they've always drank in, so you can discover a new local. Spin for it and let the app choose, or plan a bar crawl near you.",
+    cardId: "outtonight",
+    trace: "Side project",
+    followUps: [
+      { label: "Show me his work", key: "work" },
+      { label: "Tell me about him", key: "about" },
+      { label: "How do I get in touch?", key: "contact" }
+    ]
+  },
   game: {
     text: "Sure — a quick 5-question round on how well you know Padraig. No pressure.",
     cardId: "game",
@@ -1196,6 +1250,10 @@ const TOPICS = [
   { key: 'game', words: [
       'game', 'quiz', 'trivia', '=play', 'for fun', 'something fun', 'bored',
       'challenge me', 'test me', 'test my', 'puzzle' ] },
+
+  { key: 'outtonight', words: [
+      'out tonight', 'outtonight', 'pub', 'pubs', 'pub finder', 'bar crawl', 'pub crawl', 'slot machine',
+      'night out', 'side project', 'side projects', 'personal project', 'passion project' ] },
 
   { key: 'campaign', words: [
       'campaign', 'banner', 'key visual', '=kv', '=ad', '=ads', 'advert', 'advertis', 'betting',
