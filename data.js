@@ -91,7 +91,7 @@ const CATEGORIES = {
   },
   outtonight: {
     title: "Out Tonight",
-    oneLiner: "A pub finder for Ireland. Can't decide where to go? Spin for it and get a pick, or plan a bar crawl, with pubs near you.",
+    oneLiner: "A pub finder for Ireland. Discover somewhere new, spin for your next stop, or plan a bar crawl.",
     tags: ["Side Project", "Product Design", "Web App"],
     heroPattern: "outtonight",
     heroImage: { src: "images/out-tonight-card.jpg", alt: "Out Tonight: pub finder for Ireland. Spin for it.", w: 1200, h: 630 },
