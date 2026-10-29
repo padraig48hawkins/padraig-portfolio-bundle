@@ -7,12 +7,12 @@
 <meta name="theme-color" content="#FFFFFF">
 <title>Padraig — Creative Innovation Designer</title>
 <link rel="canonical" href="https://padraighawkins.ie/">
-<meta name="description" content="Digital designer working across campaign creative, digital experiences, motion &amp; video, and brand systems — explore the work through an interactive AI-guided portfolio.">
+<meta name="description" content="Digital designer working across social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
 
 <!-- Open Graph / social link previews (Slack, LinkedIn, iMessage, etc.) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Padraig — Creative Innovation Designer">
-<meta property="og:description" content="Digital designer working across campaign creative, digital experiences, motion & video, and brand systems — explore the work through an interactive AI-guided portfolio.">
+<meta property="og:description" content="Digital designer working across social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
 <meta property="og:url" content="https://padraighawkins.ie/">
 <!-- Social previews need absolute URLs (LinkedIn ignores relative paths) -->
 <meta property="og:image" content="https://padraighawkins.ie/images/social-preview.jpg">
@@ -20,7 +20,7 @@
 <!-- Twitter/X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Padraig — Creative Innovation Designer">
-<meta name="twitter:description" content="Digital designer working across campaign creative, digital experiences, motion & video, and brand systems — explore the work through an interactive AI-guided portfolio.">
+<meta name="twitter:description" content="Digital designer working across social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
 <meta name="twitter:image" content="https://padraighawkins.ie/images/social-preview.jpg">
 
 <!-- Favicon -->
@@ -106,6 +106,7 @@
     font-size:13.5px; color:var(--ink); background:none; border:none; text-align:left;
     cursor:pointer; width:100%;
   }
+  a.nav-item{text-decoration:none;}
   .nav-item:hover{background:var(--surface); box-shadow:0 0 0 1px var(--line) inset;}
   .nav-item .dot{width:5px;height:5px;border-radius:50%;background:var(--faint); flex-shrink:0;}
 
@@ -175,6 +176,9 @@
     letter-spacing:-0.02em; line-height:1.2; margin:0 0 10px;
   }
   .empty-state h1 span{color:var(--accent);}
+  .empty-state .alt-link{margin:22px 0 0; font-size:13.5px;}
+  .empty-state .alt-link a{color:var(--ink); text-underline-offset:3px;}
+  .empty-state .alt-link a:hover{color:var(--accent-text);}
   .empty-state p{color:var(--muted); font-size:15px; line-height:1.6; margin:0 0 30px; max-width:480px;}
   .chip-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
   .chip{
@@ -503,6 +507,7 @@
 
     <div class="nav-group">
       <div class="nav-label">Start here</div>
+      <a class="nav-item" href="overview.html">Quick overview <span aria-hidden="true" style="margin-left:auto;color:var(--faint)">→</span></a>
       <button class="nav-item" data-key="about" data-prompt="Tell me about Padraig.">About Padraig</button>
       <button class="nav-item" data-key="timeline" data-prompt="What's Padraig's work history?">Work history</button>
       <button class="nav-item" data-key="skills" data-prompt="What tools and skills does Padraig use?">Skills &amp; tools</button>
@@ -510,10 +515,9 @@
 
     <div class="nav-group">
       <div class="nav-label">Work</div>
-      <button class="nav-item" data-key="campaign" data-prompt="Tell me about Padraig's Campaign Creative work.">Campaign Creative</button>
-      <button class="nav-item" data-key="digital" data-prompt="Tell me about Padraig's Digital Experiences work.">Digital Experiences</button>
+      <button class="nav-item" data-key="social" data-prompt="Tell me about Padraig's Social & Static work.">Social &amp; Static</button>
+      <button class="nav-item" data-key="landing" data-prompt="Tell me about Padraig's Landing Pages work.">Landing Pages</button>
       <button class="nav-item" data-key="motion" data-prompt="Tell me about Padraig's Motion & Video work.">Motion &amp; Video</button>
-      <button class="nav-item" data-key="brand" data-prompt="Tell me about Padraig's Brand & Visual Systems work.">Brand &amp; Visual Systems</button>
     </div>
 
     <div class="nav-group">
@@ -557,19 +561,20 @@
             <span class="chip-eyebrow">Toolkit</span>
             What tools and skills does he use?
           </button>
-          <button class="chip" data-key="campaign" data-prompt="Tell me about Padraig's Campaign Creative work.">
+          <button class="chip" data-key="social" data-prompt="Tell me about Padraig's Social & Static work.">
             <span class="chip-eyebrow">Work</span>
-            What's his campaign creative work like?
+            Show me his social &amp; static work
           </button>
-          <button class="chip" data-key="digital" data-prompt="Tell me about Padraig's Digital Experiences work.">
+          <button class="chip" data-key="landing" data-prompt="Tell me about Padraig's Landing Pages work.">
             <span class="chip-eyebrow">Work</span>
-            Show me his digital experiences
+            Show me his landing pages
           </button>
           <button class="chip" data-key="game" data-prompt="Got a quick game?">
             <span class="chip-eyebrow">Just for fun</span>
             Got a quick game?
           </button>
         </div>
+        <p class="alt-link">Rather skip the chat? <a href="overview.html">View the quick overview →</a></p>
       </div>
       <div class="chat-inner" id="chatInner"></div>
     </div>
@@ -604,110 +609,9 @@
   </figure>
 </div>
 
+<script src="data.js"></script>
 <script>
-/* ============ WORK CATEGORIES ============
-   The four disciplines Padraig's actual work spans, rather than individual
-   named projects. Descriptions are grounded in what he's told me; the gallery
-   slots are honest placeholders — drop in real samples per category. */
-/* ============ WORK CATEGORIES — CASE STUDY FORMAT ============
-   Each category is an expandable case study. `oneLiner` and `tags` are real
-   (from Padraig). Everything else — overview/problem/research/process/
-   solution/outcome/metrics — is placeholder text for Padraig to replace
-   directly below. Just edit the strings; nothing else needs to change. */
-const CATEGORIES = {
-  campaign: {
-    title: "Campaign Creative",
-    oneLiner: "Key visuals for offer campaigns, promotional graphics, seasonal campaigns, and the multi-channel asset sets that carry them across every platform.",
-    tags: ["Offer Key Visuals", "Promotional Graphics", "Seasonal Campaigns", "Multi-Channel Assets"],
-    heroPattern: "campaign",
-    gallery: [
-      { type: "image", src: "images/6_5__iPhone__1284_x_2778.png", caption: "App Store screenshot — Crear Apuesta feature (iPhone 6.5\")", w: 3852, h: 2778 },
-      { type: "image", src: "images/8x_6_9__iPhone__1290_x_2796.png", caption: "App Store screenshot — Casino features carousel (iPhone 6.9\")", w: 8000, h: 2167 },
-      { type: "image", src: "images/App-Banners-World-Cup-Proof-V3.png", caption: "World Cup app banner template proof — offers, Crear Apuesta, Club Betfair", w: 8000, h: 3985 },
-      { type: "image", src: "images/117830_Change_of_imagery_-_Casino.png", caption: "Casino key visual — Fortune Rabbit & Fortune Ox slots", w: 1080, h: 1080 },
-      { type: "image", src: "images/4527177ad483_ds119236_heroimg_v1.png", caption: "Casino key visual — Blue Wizard, Big Circus & Age of the Gods slots", w: 728, h: 742 },
-      { type: "image", src: "images/PLAYER-3_CQ7A4292_jw_comp_simp.png", caption: "Sports betting key visual — EDGE bet builder feature", w: 4480, h: 6720 },
-      { type: "image", src: "images/Screen2.png", caption: "Combined sportsbook & casino key visual (Romania)", w: 2048, h: 2732 },
-      { type: "video", src: "images/3072x1152_2.mp4", caption: "Football sponsorship — wide-format video ad (3072×1152)", w: 3072, h: 1152, poster: "images/poster-3072x1152_2.jpg" },
-      { type: "video", src: "images/112380_Cruzeiro_-_YouTube_pre_roll.mp4", caption: "Cruzeiro sponsorship — YouTube pre-roll ad", w: 1920, h: 1080, poster: "images/poster-112380_Cruzeiro_-_YouTube_pre_roll.jpg" }
-    ]
-  },
-  digital: {
-    title: "Digital Experiences",
-    oneLiner: "Landing page redesigns and promotional web pages, built around clear user journeys and fully responsive layouts.",
-    tags: ["Landing Pages", "Promotional Web Pages", "User Journeys", "Responsive Layouts"],
-    heroPattern: "digital",
-    accent: "sky",
-    miniCategories: [
-      {
-        label: "Landing Pages",
-        items: [
-          { type: "image", src: "images/Prospect-Page-Layout-Mock-Up-2_Proof.jpg", caption: "Prospect landing page — desktop & mobile, new-customer offer", w: 1850, h: 2463 },
-          { type: "image", src: "images/DESKTOP_v3.png", caption: "Betfair Exchange desktop landing page — value proposition layout", w: 1366, h: 1328 },
-          { type: "image", src: "images/Exchange-comms-V3_Proof.png", caption: "Betfair Exchange landing page proof — desktop & mobile, login variant", w: 1965, h: 1328 },
-          { type: "video", src: "images/Desktop_V1.mp4", caption: "Desktop landing page — motion walkthrough", w: 1366, h: 1328, poster: "images/poster-Desktop_V1.jpg" }
-        ]
-      },
-      {
-        label: "L Bars",
-        items: [
-          { type: "image", src: "images/Brand_L-Bar-CTV_Crear-Apuesta_FIGO-Version_proofOP1.png", caption: "CTV L-bar proof — bet builder ('Crear Apuesta'), option 1", w: 1280, h: 720 },
-          { type: "image", src: "images/Brand_L-Bar-CTV_Crear-Apuesta_FIGO-Version_proofOP2.png", caption: "CTV L-bar proof — bet builder ('Crear Apuesta'), option 2", w: 1280, h: 720 },
-          { type: "image", src: "images/ESPN_J_bar___EU_leagues_and_CONMEBOL__R_300_SUO_V2.png", caption: "ESPN J-bar — EU leagues & CONMEBOL, R$300 sign-up offer", w: 1280, h: 720 }
-        ]
-      },
-      {
-        label: "Spotify Adverts",
-        items: [
-          { type: "image", src: "images/600x640.png", caption: "Spotify display ad — static creative", w: 600, h: 640 },
-          { type: "image", src: "images/Picture_1.png", caption: "Spotify mobile — ad placement in podcast player", w: 278, h: 604 },
-          { type: "image", src: "images/Picture_2.png", caption: "Spotify desktop — ad placement in playlist view", w: 500, h: 286 }
-        ]
-      }
-    ]
-  },
-  motion: {
-    title: "Motion & Video",
-    oneLiner: "This collection showcases my work across motion graphics, video production, and post-production.",
-    tags: ["Motion Graphics", "Social Animations", "Podcast Editing", "Promotional Videos"],
-    heroPattern: "motion",
-    accent: "maroon",
-    overview: "This collection showcases my work across motion graphics, video editing, podcast production, and digital content creation. From editing raw footage and animating branded assets to producing promotional videos and social-first content, these projects highlight my end-to-end production workflow across multiple campaigns. The showreel below features a selection of podcast edits, motion graphics, campaign content, and video editing projects, providing an overview of both my creative and technical capabilities.",
-    showreel: { src: "images/Showreel.mp4", poster: "images/poster-Showreel.jpg" },
-    process: "<b>DISCOVER</b>, Review the creative brief, campaign objectives, target audience, and source assets to define the project's goals and required deliverables. <br> <b>CREATE</b>,Develop the edit, motion graphics, and visual storytelling using a combination of video editing, animation, sound, and branded assets.<br> <b>REFINE</b>,Iterate on pacing, transitions, timing, and visual consistency through stakeholder feedback and quality assurance.<br> <b>DELIVER</b>, Optimise and export content for multiple platforms, producing final videos, motion assets, thumbnails, and social-first edits ready for distribution.",
-    metrics: [
-      { value: "—", label: "Add a real metric" },
-      { value: "—", label: "Add a real metric" }
-    ],
-    gallery: [
-    { type: "image", src: "images/campaign-1.jpg", caption: "Offer key visual" },
-    { type: "link", href: "https://example.com", caption: "View live campaign" }
-  ]
-  },
-  brand: {
-    title: "Brand & Visual Systems",
-    oneLiner: "Design systems, templates and asset libraries that keep creative consistent across every campaign.",
-    tags: ["Design Systems", "Templates", "Asset Libraries", "Creative Consistency"],
-    heroPattern: "brand",
-    gallery: [
-      { type: "image", src: "images/110411_R_-300-Matched-Deposit-Offer.png", caption: "Matched deposit offer banner templates — R$300 bonus (Brazil)", w: 4132, h: 4200 },
-      { type: "image", src: "images/116852-Spain-ACQ-Banner-Templates_2_Proof3.png", caption: "Acquisition banner template system — Bet €5 Get €20 (Spain)", w: 6038, h: 3100 },
-      { type: "image", src: "images/117002_Spain-ACQ-B5-G20-tennis_ProofV2.png", caption: "Tennis-themed acquisition banner variants (Spain)", w: 4416, h: 4112 },
-      { type: "image", src: "images/117019_App-Banners-Refresh_1_ProofV1.png", caption: "App download banner refresh — multi-format templates (Brazil)", w: 4832, h: 6656 },
-      { type: "image", src: "images/117218_Spain-ACQ-B5-G20-Tennis_Proof.png", caption: "Extended tennis banner template set (Spain)", w: 8000, h: 2293 },
-      { type: "image", src: "images/117286_creative-UFC_Proof.png", caption: "UFC/MMA-themed acquisition banner variants (Spain)", w: 3468, h: 3370 }
-    ]
-  }
-  ,
-  outtonight: {
-    title: "Out Tonight",
-    oneLiner: "A pub finder for Ireland. Can't decide where to go? Spin for it and get a pick, or plan a bar crawl, with pubs near you.",
-    tags: ["Side Project", "Product Design", "Web App"],
-    heroPattern: "outtonight",
-    heroImage: { src: "images/out-tonight-card.jpg", alt: "Out Tonight: pub finder for Ireland. Spin for it.", w: 1200, h: 630 },
-    link: { href: "https://outtonight.ie/", label: "Visit outtonight.ie" }
-  }
-};
+/* Work categories, skills and work history now live in data.js (shared with overview.html). */
 
 const HERO_SVGS = {
   campaign: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="20" width="140" height="35" rx="3" fill="none" stroke="#3B2FF5" stroke-width="1.5"/><rect x="40" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="20" width="60" height="78" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="280" y="20" width="90" height="35" rx="3" fill="#3B2FF5"/><rect x="280" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/></svg>`,
@@ -805,8 +709,8 @@ function buildGallery(items){
 function buildImageGallery(items){ return buildGallery(items); }
 
 /* Renders a gallery as labelled sub-groups ("mini categories") instead of one
-   flat set — used by Digital Experiences to separate Landing Pages / L Bars /
-   Spotify Adverts etc.
+   flat set — used by Social & Static to separate Key Visuals / Banner Templates /
+   L Bars / Spotify Ads.
    Shape: [{ label: "Landing Pages", items: [...] }, ...] */
 function buildMiniCategoryGallery(groups){
   return (groups || []).map(group => `
@@ -823,7 +727,7 @@ function buildMiniCategoryGallery(groups){
 const QUIZ_QUESTIONS = [
   { q: "Which of these is NOT part of Padraig's toolkit?", options: ["Figma", "Blender", "Photoshop", "Premiere Pro"], answer: 1 },
   { q: "Which city is Padraig based in?", options: ["London", "Dublin", "Cork", "Belfast"], answer: 1 },
-  { q: "Which of these is one of his work categories?", options: ["Sound Design", "Data Engineering", "Campaign Creative", "Legal Ops"], answer: 2 },
+  { q: "Which of these is one of his work areas?", options: ["Sound Design", "Data Engineering", "Landing Pages", "Legal Ops"], answer: 2 },
   { q: "What does he use for motion graphics?", options: ["Excel", "AutoCAD", "After Effects", "Slack"], answer: 2 },
   { q: "A big part of his day job is campaigns for...", options: ["Betting & advertising", "Aerospace", "Agriculture", "Banking software"], answer: 0 }
 ];
@@ -919,13 +823,20 @@ function buildCategoryCard(id){
           <h4 class="cs-label">Showreel</h4>
           ${buildShowreel(c.showreel)}
         </div>`;
-  } else if (id === 'digital') {
-    // Opens straight onto the work — the sub-group labels (Landing Pages, L Bars…) do the labelling.
+    if (c.gallery && c.gallery.length) {
+      bodyHtml += `
+        <div class="cs-section">
+          <h4 class="cs-label">Campaign video</h4>
+          ${buildGallery(c.gallery)}
+        </div>`;
+    }
+  } else if (c.miniCategories) {
+    // Opens straight onto the work — the sub-group labels (Key Visuals, L Bars…) do the labelling.
     bodyHtml += `
         <div class="cs-section">
           ${buildMiniCategoryGallery(c.miniCategories)}
         </div>`;
-  } else if (id === 'campaign' || id === 'brand') {
+  } else if (c.gallery) {
     bodyHtml += `
         <div class="cs-section">
           ${buildGallery(c.gallery)}
@@ -1011,12 +922,6 @@ function wireCardToggles(container){
   });
 }
 
-/* Real skills and toolkit as given by Padraig. */
-const SKILLS_DATA = {
-  core: ["Digital Design", "Key Visual & Banner Design", "Landing Page Design", "Motion Graphics","Workflow & Automation", "Video & Podcast Editing", "UI/UX Design & Prototyping"],
-  toolkit: ["Photoshop", "After Effects", "Premiere Pro", "Adobe XD", "Figma","Magnific AI","Flora AI", "VS Code"]
-};
-
 function buildSkillsCard(){
   const coreHtml = SKILLS_DATA.core.map(s => `<span class="skill-pill">${s}</span>`).join('');
   const toolkitHtml = SKILLS_DATA.toolkit.map(s => `<span class="skill-pill maroon">${s}</span>`).join('');
@@ -1033,14 +938,6 @@ function buildSkillsCard(){
     </div>
   </div>`;
 }
-
-/* Real work history. */
-const TIMELINE_DATA = [
-  { date: "2026 — Present", role: "Creative Innovation Designer", company: "Flutter UKI", desc: "Developing AI-powered workflows that enhance design team efficiency, streamline production processes, and significantly reduce creative turnaround times." },
-  { date: "2022 — 2026", role: "Digital Designer", company: "Betfair International", desc: "Created high-impact digital campaigns across web, app, social, and display, including key visuals, landing pages, motion graphics, video editing, and promotional assets." },
-  { date: "2020 (Dec) — 2022 (Feb)", role: "Print/Graphic Designer", company: "Whiteriver Group", desc: "Designed print and digital marketing materials, branding, packaging, and large-format graphics for a wide range of clients." },
-  { date: "2020 (Sep) — 2020 (Nov) — Contract", role: "Web Designer", company: "Currency fair", desc: "Migrating and rebuilding web pages with a focus on performance and usability" }
-];
 
 function buildTimelineCard(){
   const itemsHtml = TIMELINE_DATA.map(t => `
@@ -1062,11 +959,11 @@ function buildContactCard(){
   <div class="skills-card">
     <h3 class="skills-card-title">Get in touch</h3>
     <div class="contact-actions">
-      <a class="contact-btn" href="mailto:padraig48hawkins@gmail.com">
+      <a class="contact-btn" href="mailto:${CONTACT.email}">
         Email Padraig
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="contact-btn secondary" href="https://www.linkedin.com/in/padraig-hawkins-b33700150" target="_blank" rel="noopener">
+      <a class="contact-btn secondary" href="${CONTACT.linkedin}" target="_blank" rel="noopener">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
         View LinkedIn
       </a>
@@ -1086,7 +983,7 @@ const CANNED_RESPONSES = {
     followUps: [
       { label: "What's his work history?", key: "timeline" },
       { label: "What tools does he use?", key: "skills" },
-      { label: "Show me Campaign Creative", key: "campaign" }
+      { label: "Show me Social & Static", key: "social" }
     ]
   },
   timeline: {
@@ -1105,47 +1002,37 @@ const CANNED_RESPONSES = {
     trace: "Skills & toolkit",
     followUps: [
       { label: "What's his work history?", key: "timeline" },
-      { label: "Show me Campaign Creative", key: "campaign" },
+      { label: "Show me Social & Static", key: "social" },
       { label: "How do I get in touch?", key: "contact" }
     ]
   },
-  campaign: {
-    text: "A big part of Padraig's day-to-day is large betting and advertising campaigns. Here's the full case study:",
-    cardId: "campaign",
-    trace: "Campaign Creative",
+  social: {
+    text: "Most of Padraig's day-to-day is social and static work for large betting and advertising campaigns: key visuals, banners and ad sets in every size, built as templates that scale across markets. Here's the full set:",
+    cardId: "social",
+    trace: "Social & Static",
     followUps: [
-      { label: "Show me Digital Experiences", key: "digital" },
+      { label: "Show me Landing Pages", key: "landing" },
       { label: "Show me Motion & Video", key: "motion" },
       { label: "What tools does he use?", key: "skills" }
     ]
   },
-  digital: {
-    text: "Padraig also handles the web side of campaigns. Here's the full case study:",
-    cardId: "digital",
-    trace: "Digital Experiences",
+  landing: {
+    text: "Padraig also designs the web side of campaigns: landing pages with clear user journeys that work on any screen. Here's the full set:",
+    cardId: "landing",
+    trace: "Landing Pages",
     followUps: [
-      { label: "Show me Campaign Creative", key: "campaign" },
-      { label: "Show me Brand & Visual Systems", key: "brand" },
+      { label: "Show me Social & Static", key: "social" },
+      { label: "Show me Motion & Video", key: "motion" },
       { label: "What tools does he use?", key: "skills" }
     ]
   },
   motion: {
-    text: "Padraig works across motion and video too. Here's the full case study:",
+    text: "Padraig works across motion graphics, video editing and podcast production too. Here's the showreel and some campaign video:",
     cardId: "motion",
     trace: "Motion & Video",
     followUps: [
-      { label: "Show me Campaign Creative", key: "campaign" },
-      { label: "Show me Brand & Visual Systems", key: "brand" },
-      { label: "How do I get in touch?", key: "contact" }
-    ]
-  },
-  brand: {
-    text: "Padraig also does design systems and visual identity work. Here's the full case study:",
-    cardId: "brand",
-    trace: "Brand & Visual Systems",
-    followUps: [
-      { label: "Show me Campaign Creative", key: "campaign" },
-      { label: "Show me Digital Experiences", key: "digital" },
+      { label: "Show me Social & Static", key: "social" },
+      { label: "Show me Landing Pages", key: "landing" },
       { label: "How do I get in touch?", key: "contact" }
     ]
   },
@@ -1195,13 +1082,12 @@ const CANNED_RESPONSES = {
     ]
   },
   work: {
-    text: "Padraig's work falls into four areas — pick one and I'll open the full case study.",
+    text: "Padraig's work falls into three areas — pick one and I'll open it up.",
     trace: "Work overview",
     followUps: [
-      { label: "Campaign Creative", key: "campaign" },
-      { label: "Digital Experiences", key: "digital" },
-      { label: "Motion & Video", key: "motion" },
-      { label: "Brand & Visual Systems", key: "brand" }
+      { label: "Social & Static", key: "social" },
+      { label: "Landing Pages", key: "landing" },
+      { label: "Motion & Video", key: "motion" }
     ]
   },
   site: {
@@ -1214,7 +1100,7 @@ const CANNED_RESPONSES = {
     ]
   },
   fallback: {
-    text: "That's not one Padraig's written an answer for yet — try asking about his campaign work, digital experiences, motion & video, brand systems, his career, his toolkit, or how to get in touch.",
+    text: "That's not one Padraig's written an answer for yet — try asking about his social & static work, landing pages, motion & video, his career, his toolkit, or how to get in touch.",
     trace: "No match",
     followUps: [
       { label: "Tell me about him", key: "about" },
@@ -1255,22 +1141,20 @@ const TOPICS = [
       'out tonight', 'outtonight', 'pub', 'pubs', 'pub finder', 'bar crawl', 'pub crawl', 'slot machine',
       'night out', 'side project', 'side projects', 'personal project', 'passion project' ] },
 
-  { key: 'campaign', words: [
-      'campaign', 'banner', 'key visual', '=kv', '=ad', '=ads', 'advert', 'advertis', 'betting',
-      'sportsbook', 'casino', 'app store', 'social media', 'social ad', 'promo', 'marketing', 'world cup' ] },
+  { key: 'social', words: [
+      'social', 'static', 'campaign', 'banner', 'key visual', '=kv', '=ad', '=ads', 'advert', 'advertis',
+      'betting', 'sportsbook', 'casino', 'app store', 'social media', 'social ad', 'promo', 'marketing',
+      'world cup', 'l bar', 'spotify', 'spotify ad', 'brand', 'visual system', 'visual identity', 'identity',
+      'logo', 'design system', 'template', 'style guide', 'guideline', 'visual language', 'asset' ] },
 
-  { key: 'digital', words: [
-      'digital experience', 'digital', 'landing page', 'landing', 'web page', 'webpage', 'website',
+  { key: 'landing', words: [
+      'landing page', 'landing', 'digital experience', 'digital', 'web page', 'webpage', 'website',
       'web design', '=web', '=ux', '=ui', 'user journey', 'user experience', 'user interface',
-      'responsive', 'l bar', 'spotify', 'spotify ad', 'prototype' ] },
+      'responsive', 'prototype' ] },
 
   { key: 'motion', words: [
       'motion', 'video', 'podcast', 'tv ad', 'tv commercial', 'showreel', '=reel', 'animat',
       'edit', 'film', 'footage', 'youtube', 'pre roll', 'sponsor' ] },
-
-  { key: 'brand', words: [
-      'brand', 'visual system', 'visual identity', 'identity', 'typography', 'logo',
-      'design system', 'template', 'style guide', 'guideline', 'visual language', 'asset' ] },
 
   { key: 'skills', words: [
       'tool', 'skill', 'stack', 'software', 'photoshop', 'after effects', 'premiere', 'figma', '=xd',
@@ -1455,6 +1339,14 @@ document.querySelectorAll('[data-prompt]').forEach(el => {
     handleAsk(el.getAttribute('data-prompt'), el.getAttribute('data-key'));
   });
 });
+
+// Deep links, e.g. index.html#social (used by the overview page) open that answer straight away.
+(function(){
+  const k = decodeURIComponent(location.hash.slice(1));
+  if (!k) return;
+  const el = Array.from(document.querySelectorAll('[data-prompt]')).find(n => n.getAttribute('data-key') === k);
+  if (el) setTimeout(() => el.click(), 250);
+})();
 
 input.addEventListener('input', () => {
   input.style.height = 'auto';
