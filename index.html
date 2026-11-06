@@ -7,12 +7,12 @@
 <meta name="theme-color" content="#FFFFFF">
 <title>Padraig — Creative Innovation Designer</title>
 <link rel="canonical" href="https://padraighawkins.ie/">
-<meta name="description" content="Digital designer working across social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
+<meta name="description" content="Digital designer working across AI workflows, social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
 
 <!-- Open Graph / social link previews (Slack, LinkedIn, iMessage, etc.) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Padraig — Creative Innovation Designer">
-<meta property="og:description" content="Digital designer working across social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
+<meta property="og:description" content="Digital designer working across AI workflows, social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
 <meta property="og:url" content="https://padraighawkins.ie/">
 <!-- Social previews need absolute URLs (LinkedIn ignores relative paths) -->
 <meta property="og:image" content="https://padraighawkins.ie/images/social-preview.jpg">
@@ -20,7 +20,7 @@
 <!-- Twitter/X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Padraig — Creative Innovation Designer">
-<meta name="twitter:description" content="Digital designer working across social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
+<meta name="twitter:description" content="Digital designer working across AI workflows, social &amp; static, landing pages, and motion &amp; video — explore the work through an interactive AI-guided portfolio.">
 <meta name="twitter:image" content="https://padraighawkins.ie/images/social-preview.jpg">
 
 <!-- Favicon -->
@@ -338,6 +338,51 @@
   .quiz-result-score{font-family:'Inter',sans-serif; font-weight:700; font-size:30px; color:var(--accent); margin:2px 0 8px;}
   .quiz-result-msg{font-size:13.5px; color:var(--muted); line-height:1.6; margin:0 0 16px;}
 
+  /* ---------- AI WORKFLOWS CARD ---------- */
+  .ai-entries{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .ai-entry{border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper);}
+  .ai-entry-head{display:flex; align-items:center; gap:8px; margin-bottom:4px;}
+  .ai-kind{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--accent-text); background:var(--accent-dim); padding:2px 8px; border-radius:100px;
+  }
+  .ai-entry h4{font-size:14px; letter-spacing:-.01em; margin:0;}
+  .ai-entry p{margin:0; font-size:13.5px; line-height:1.55; color:var(--muted);}
+  .ai-entry-img{display:block; width:100%; height:auto; border-radius:8px; margin-bottom:10px; border:1px solid var(--line); cursor:zoom-in; background:var(--surface);}
+
+  /* ---------- BONUS ROUND: SALARY SLIDER ---------- */
+  .offer{margin-top:20px; padding-top:20px; border-top:1px solid var(--line);}
+  .offer-eyebrow{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-text); margin:0 0 6px;}
+  .offer-title{font-size:16px; font-weight:700; letter-spacing:-.015em; margin:0 0 2px;}
+  .offer-sub{margin:0 0 14px; font-size:12.5px; color:var(--muted);}
+  .offer-amount{font-size:44px; font-weight:700; letter-spacing:-.035em; line-height:1; font-variant-numeric:tabular-nums; margin:0 0 14px;}
+  .offer-amount .cur{color:var(--accent);}
+  .offer-range{
+    -webkit-appearance:none; appearance:none; width:100%; height:28px; margin:0; background:transparent; cursor:pointer; --pct:0%;
+  }
+  .offer-range:focus{outline:none;}
+  .offer-range::-webkit-slider-runnable-track{height:8px; border-radius:100px; background:linear-gradient(to right, var(--accent) var(--pct), #DADAD6 var(--pct));}
+  .offer-range::-moz-range-track{height:8px; border-radius:100px; background:#DADAD6;}
+  .offer-range::-moz-range-progress{height:8px; border-radius:100px; background:var(--accent);}
+  .offer-range::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:28px; height:28px; border-radius:50%; margin-top:-10px;
+    background:var(--ink); border:4px solid var(--paper); box-shadow:0 0 0 1.5px var(--ink), 0 4px 10px rgba(0,0,0,.18);
+  }
+  .offer-range::-moz-range-thumb{
+    width:20px; height:20px; border-radius:50%; background:var(--ink); border:4px solid var(--paper);
+    box-shadow:0 0 0 1.5px var(--ink), 0 4px 10px rgba(0,0,0,.18);
+  }
+  .offer-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 1.5px var(--ink), 0 0 0 5px var(--accent-dim);}
+  .offer-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 1.5px var(--ink), 0 0 0 5px var(--accent-dim);}
+  .offer-ticks{display:flex; justify-content:space-between; margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--faint);}
+  .offer-reaction{margin:16px 0 14px; padding:12px 14px; border-radius:12px; background:var(--paper); border:1px solid var(--line); min-height:68px;}
+  .offer-reaction .who{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0 0 3px;}
+  .offer-reaction .line{font-size:14.5px; font-weight:500; line-height:1.4; margin:0;}
+  .offer-actions{display:flex; align-items:center; gap:8px 12px; flex-wrap:wrap;}
+  .offer-hint{font-size:12px; color:var(--faint); margin:10px 0 0;}
+  .offer-hint a{color:inherit; text-underline-offset:3px;}
+  .offer-again{margin-top:18px;}
+
   /* ---------- TIMELINE ---------- */
   .timeline{position:relative; padding-left:22px; margin-top:4px;}
   .timeline::before{content:''; position:absolute; left:5px; top:5px; bottom:5px; width:1.5px; background:var(--line);}
@@ -515,6 +560,7 @@
 
     <div class="nav-group">
       <div class="nav-label">Work</div>
+      <button class="nav-item" data-key="ai" data-prompt="Tell me about Padraig's AI Workflows.">AI Workflows</button>
       <button class="nav-item" data-key="social" data-prompt="Tell me about Padraig's Social & Static work.">Social &amp; Static</button>
       <button class="nav-item" data-key="landing" data-prompt="Tell me about Padraig's Landing Pages work.">Landing Pages</button>
       <button class="nav-item" data-key="motion" data-prompt="Tell me about Padraig's Motion & Video work.">Motion &amp; Video</button>
@@ -614,6 +660,7 @@
 /* Work categories, skills and work history now live in data.js (shared with overview.html). */
 
 const HERO_SVGS = {
+  ai: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><path d="M90 60L190 36M90 60L190 84M210 36L310 60M210 84L310 60" stroke="#2E2E42" stroke-width="2"/><rect x="150" y="14" width="100" height="92" rx="6" fill="none" stroke="#F7F7FF" stroke-width="1.5" stroke-dasharray="5 4"/><circle cx="80" cy="60" r="14" fill="#3B2FF5"/><circle cx="200" cy="36" r="12" fill="#FF3366"/><circle cx="200" cy="84" r="12" fill="#FFD020"/><circle cx="320" cy="60" r="14" fill="#00D68F"/></svg>`,
   campaign: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="20" width="140" height="35" rx="3" fill="none" stroke="#3B2FF5" stroke-width="1.5"/><rect x="40" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="200" y="20" width="60" height="78" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/><rect x="280" y="20" width="90" height="35" rx="3" fill="#3B2FF5"/><rect x="280" y="63" width="90" height="35" rx="3" fill="none" stroke="#2E2E42" stroke-width="1.5"/></svg>`,
   digital: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><rect x="40" y="24" width="200" height="72" rx="4" fill="none" stroke="#2E2E42" stroke-width="1.5"/><line x1="40" y1="40" x2="240" y2="40" stroke="#2E2E42" stroke-width="1.5"/><circle cx="52" cy="32" r="2.5" fill="#00AEEF"/><circle cx="62" cy="32" r="2.5" fill="#2E2E42"/><circle cx="72" cy="32" r="2.5" fill="#2E2E42"/><rect x="270" y="24" width="90" height="72" rx="6" fill="none" stroke="#00AEEF" stroke-width="1.5" stroke-dasharray="4 3"/></svg>`,
   motion: `<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="120" fill="#0A0A14"/><circle cx="90" cy="60" r="28" fill="none" stroke="#FF3366" stroke-width="2"/><path d="M82 46l24 14-24 14V46z" fill="#FF3366"/><rect x="160" y="56" width="200" height="4" rx="2" fill="#2E2E42"/><rect x="160" y="56" width="90" height="4" rx="2" fill="#FF3366"/><circle cx="250" cy="58" r="5" fill="#FF3366"/></svg>`,
@@ -737,6 +784,65 @@ function buildQuizCard(){
   return `<div class="skills-card quiz-card" data-game-id="${gameId}"></div>`;
 }
 
+/* ============ BONUS ROUND: HOW MUCH WOULD YOU OFFER PADRAIG? ============
+   A joke salary slider shown under the quiz score. Nothing is stored or sent
+   anywhere: "Send your offer" just opens the visitor's own email app with a
+   draft addressed to CONTACT.email (from data.js).
+   Edit OFFER_TIERS to change the reaction lines. The first tier whose `upTo`
+   is at or above the offer wins. */
+const OFFER_MAX = 500000;
+const OFFER_TIERS = [
+  { upTo: 0,      line: "Exposure? Lovely." },
+  { upTo: 10000,  line: "Is that monthly?" },
+  { upTo: 65000,  line: "That's a start. (Not a good one)" },
+  { upTo: 125000, line: "You have my attention." },
+  { upTo: 250000, line: "I can start Monday. I can start yesterday." },
+  { upTo: 500000, line: "Where do I sign?" }
+];
+
+function buildOfferHtml(){
+  return `
+    <div class="offer">
+      <p class="offer-eyebrow">Bonus round</p>
+      <h4 class="offer-title">How much would you offer Padraig?</h4>
+      <p class="offer-sub">Drag to name your price. Nothing is saved or sent anywhere.</p>
+      <div class="offer-amount"><span class="cur">€</span><span class="offer-amount-num">0</span></div>
+      <input class="offer-range" type="range" min="0" max="${OFFER_MAX}" step="1000" value="0" aria-label="Your offer to Padraig, in euro">
+      <div class="offer-ticks" aria-hidden="true"><span>€0</span><span>€125k</span><span>€250k</span><span>€375k</span><span>€500k</span></div>
+      <div class="offer-reaction" aria-live="polite">
+        <p class="who">Padraig says</p>
+        <p class="line"></p>
+      </div>
+      <div class="offer-actions">
+        <a class="contact-btn offer-send" href="#">Send your offer
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <p class="offer-hint">Opens an email to Padraig. Nothing opened? Email <a href="mailto:${CONTACT.email}">${CONTACT.email}</a></p>
+    </div>`;
+}
+
+function wireOffer(cardEl){
+  const range = cardEl.querySelector('.offer-range');
+  if (!range) return;
+  const amountEl = cardEl.querySelector('.offer-amount-num');
+  const lineEl = cardEl.querySelector('.offer-reaction .line');
+  const send = cardEl.querySelector('.offer-send');
+  const fmt = new Intl.NumberFormat('en-IE');
+  function update(){
+    const v = +range.value;
+    amountEl.textContent = fmt.format(v);
+    range.style.setProperty('--pct', (v / OFFER_MAX * 100) + '%');
+    const tier = OFFER_TIERS.find(t => v <= t.upTo) || OFFER_TIERS[OFFER_TIERS.length - 1];
+    lineEl.textContent = tier.line;
+    const subject = 'Offer: €' + fmt.format(v);
+    const body = 'Hi Padraig,\n\nI\'d like to make you an offer of €' + fmt.format(v) + '.\n\nName:\nCompany:\nA few words:\n';
+    send.href = 'mailto:' + CONTACT.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+  range.addEventListener('input', update);
+  update();
+}
+
 function renderQuizStep(cardEl, index, score){
   if (index >= QUIZ_QUESTIONS.length) {
     const pct = score / QUIZ_QUESTIONS.length;
@@ -749,9 +855,11 @@ function renderQuizStep(cardEl, index, score){
       <h3 class="skills-card-title">Quick game: results</h3>
       <p class="quiz-result-score">${score} / ${QUIZ_QUESTIONS.length}</p>
       <p class="quiz-result-msg">${msg}</p>
-      <button class="card-toggle" type="button">Play again</button>
+      ${buildOfferHtml()}
+      <button class="card-toggle offer-again" type="button">Play again</button>
     `;
-    cardEl.querySelector('.card-toggle').addEventListener('click', () => {
+    wireOffer(cardEl);
+    cardEl.querySelector('.offer-again').addEventListener('click', () => {
       renderQuizStep(cardEl, 0, 0);
       scrollToBottom();
     });
@@ -841,6 +949,26 @@ function buildCategoryCard(id){
         <div class="cs-section">
           ${buildGallery(c.gallery)}
         </div>`;
+  }
+
+  // AI Workflows lists its entries right in the card, so there's nothing to expand.
+  if (c.entries) {
+    const entriesHtml = c.entries.map(e => `
+      <div class="ai-entry">
+        ${e.image ? `<img class="ai-entry-img" src="${e.image.src}" alt="${e.image.alt}" width="${e.image.w}" height="${e.image.h}" loading="lazy" data-title="${e.title}">` : ''}
+        <div class="ai-entry-head"><span class="ai-kind">${e.kind}</span><h4>${e.title}</h4></div>
+        <p>${e.text}</p>
+      </div>`).join('');
+    return `
+  <div class="project-card">
+    <div class="card-hero">${HERO_SVGS[c.heroPattern] || ''}</div>
+    <div class="card-body">
+      <div class="card-tags">${tagsHtml}</div>
+      <h3 class="card-title">${c.title}</h3>
+      <p class="card-oneliner">${c.oneLiner}</p>
+      <div class="ai-entries">${entriesHtml}</div>
+    </div>
+  </div>`;
   }
 
   // A card with no case-study body (e.g. Out Tonight) shows a link instead of the toggle.
@@ -1006,6 +1134,16 @@ const CANNED_RESPONSES = {
       { label: "How do I get in touch?", key: "contact" }
     ]
   },
+  ai: {
+    text: "Padraig's current role is building AI-powered creative workflows. Here are some of the processes, guides and tools he's made so far:",
+    cardId: "ai",
+    trace: "AI Workflows",
+    followUps: [
+      { label: "Show me Social & Static", key: "social" },
+      { label: "Show me Landing Pages", key: "landing" },
+      { label: "What tools does he use?", key: "skills" }
+    ]
+  },
   social: {
     text: "Most of Padraig's day-to-day is social and static work for large betting and advertising campaigns: key visuals, banners and ad sets in every size, built as templates that scale across markets. Here's the full set:",
     cardId: "social",
@@ -1082,9 +1220,10 @@ const CANNED_RESPONSES = {
     ]
   },
   work: {
-    text: "Padraig's work falls into three areas — pick one and I'll open it up.",
+    text: "Padraig's work falls into four areas — pick one and I'll open it up.",
     trace: "Work overview",
     followUps: [
+      { label: "AI Workflows", key: "ai" },
       { label: "Social & Static", key: "social" },
       { label: "Landing Pages", key: "landing" },
       { label: "Motion & Video", key: "motion" }
@@ -1100,7 +1239,7 @@ const CANNED_RESPONSES = {
     ]
   },
   fallback: {
-    text: "That's not one Padraig's written an answer for yet — try asking about his social & static work, landing pages, motion & video, his career, his toolkit, or how to get in touch.",
+    text: "That's not one Padraig's written an answer for yet — try asking about his AI workflows, social & static work, landing pages, motion & video, his career, his toolkit, or how to get in touch.",
     trace: "No match",
     followUps: [
       { label: "Tell me about him", key: "about" },
@@ -1155,6 +1294,10 @@ const TOPICS = [
   { key: 'motion', words: [
       'motion', 'video', 'podcast', 'tv ad', 'tv commercial', 'showreel', '=reel', 'animat',
       'edit', 'film', 'footage', 'youtube', 'pre roll', 'sponsor' ] },
+
+  { key: 'ai', words: [
+      'ai workflow', 'workflow', 'creative ops', 'kv studio', 'proof it', '=frame', 'variation',
+      'ai project', 'ai process', 'internal tool' ] },
 
   { key: 'skills', words: [
       'tool', 'skill', 'stack', 'software', 'photoshop', 'after effects', 'premiere', 'figma', '=xd',
@@ -1325,6 +1468,11 @@ function wireGalleryLightbox(container){
       return { src: img.currentSrc || img.src, alt: img.alt, caption: cap ? cap.textContent : '' };
     });
     nodes.forEach((n, i) => n.querySelector('img').addEventListener('click', () => openLightbox(items, i)));
+
+    // AI Workflows: the entry images open in the same viewer.
+    const aiImgs = [...card.querySelectorAll('.ai-entry-img')];
+    const aiItems = aiImgs.map(img => ({ src: img.currentSrc || img.src, alt: img.alt, caption: img.dataset.title || '' }));
+    aiImgs.forEach((img, i) => img.addEventListener('click', () => openLightbox(aiItems, i)));
   });
 }
 

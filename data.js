@@ -11,11 +11,28 @@ const CONTACT = {
 };
 
 /* ============ WORK AREAS ============
-   Three areas, named in plain words so a recruiter sees what Padraig does at a glance:
-   Social & Static, Landing Pages, Motion & Video. (AI Workflows is next.)
+   Four areas, named in plain words so a recruiter sees what Padraig does at a glance:
+   AI Workflows, Social & Static, Landing Pages, Motion & Video.
+   AI Workflows uses `entries` (kind, title, text, optional image) instead of a gallery.
    Edit the strings below; nothing else needs to change. Items shown in the gallery
    are { type: "image" | "video", src, caption, w, h, poster? }. */
 const CATEGORIES = {
+  ai: {
+    title: "AI Workflows",
+    oneLiner: "Tools, processes and guides for using AI well in creative work: faster variations, less wasted effort and clearer team workflows.",
+    tags: ["AI Tooling", "Process Design", "Creative Ops", "Prototypes"],
+    heroPattern: "ai",
+    entries: [
+      { kind: "Workflow", title: "IP-friendly character creation", text: "Fictional footballers described by build, age and kit, with no badges or logos, generated as character images, matched-up scene variations and upscales on one connected canvas.", image: { src: "images/ai-character-creation.jpg", thumb: "images/thumbs/ai-character-creation.jpg", alt: "A canvas of AI-generated fictional footballers, scene variations and upscaled images", w: 1976, h: 720 } },
+      { kind: "Workflow", title: "Static to motion: Sky Vegas", text: "One static key visual turned into 15 animation scenes, split into copy-only, key-visual-only and combined animations, each prompted and generated on a connected canvas.", image: { src: "images/ai-static-to-motion-sky-vegas.jpg", thumb: "images/thumbs/ai-static-to-motion-sky-vegas.jpg", alt: "A canvas turning one Sky Vegas Prize Machine key visual into 15 animation scenes", w: 1413, h: 801 } },
+      { kind: "Workflow", title: "Static to motion: Paddy Power", text: "Static ads turned into 45 animations: 15 each for 4:5, 9:16 Meta, Reels and Snap, and 9:16 TikTok, all built from one canvas.", image: { src: "images/ai-static-to-motion-paddy-power.jpg", thumb: "images/thumbs/ai-static-to-motion-paddy-power.jpg", alt: "A canvas turning Paddy Power static ads into 45 animations across three formats", w: 1600, h: 735 } },
+      { kind: "Process", title: "AI content variations", text: "A six-step team process for scaling one source creative into many variants across formats, channels, audiences and locales, with clear roles for the designer, the compliance reviewer and the campaign owner. Written to work with any tool." },
+      { kind: "Guide", title: "Magnific cost and workflow guides", text: "Guides for brand teams on what content costs to make with Magnific AI, how to write prompts that avoid wasted credits, and step-by-step workflows for image generation, video generation and animating assets." },
+      { kind: "Tool", title: "KV Studio", text: "A drag-and-drop key visual previewer. Drop a key visual in and see it across 40+ formats for social, CRM and email, onsite, display and out-of-home, with global headline, sub copy and CTA controls." },
+      { kind: "Tool", title: "Proof It", text: "A proofing tool for design agencies. Upload a key visual, set the copy and background, and check it across social, email, web and display sizes at once, with saved projects for each user." },
+      { kind: "Concept", title: "Frame", text: "An AI creative tool designed for in-house designers: banner variations, key visuals, and static-to-motion and still-to-motion conversions, designed across a marketing homepage, a workspace and a prompt component." }
+    ]
+  },
   social: {
     title: "Social & Static",
     oneLiner: "Key visuals, banners and ad sets for social and onsite, built as template systems that scale across sizes and markets.",
